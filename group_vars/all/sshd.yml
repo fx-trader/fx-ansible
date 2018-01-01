@@ -1,0 +1,5 @@
+---
+sshd:
+  PermitRootLogin: no
+  PasswordAuthentication: no
+  GSSAPIAuthentication: no

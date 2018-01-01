@@ -1,0 +1,33 @@
+---
+
+- name: Setup fx server
+  hosts: all
+  become: True
+
+  roles:
+    - { role: singleplatform-eng.users }
+    - { role: willshersystems.sshd }
+    - { role: geerlingguy.docker }
+
+  tasks:
+    - name: Make sure we have a wheel group
+      group:
+        name: wheel
+        state: present
+
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: visudo -cf %s
+
+    - name: Download docker images
+      docker_image:
+        name: "{{ item }}"
+      with_items:
+        - fxtrader/finance-hostedtrader
+        - fxtrader/finance-api-data
+        - redis
+        - mysqludf/ta

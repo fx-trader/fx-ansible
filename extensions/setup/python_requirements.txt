@@ -8,3 +8,4 @@ ansible
 
 #Other packages
 boto
+docker

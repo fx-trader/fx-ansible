@@ -8,6 +8,7 @@
     - { role: singleplatform-eng.users }
     - { role: willshersystems.sshd }
     - { role: geerlingguy.docker }
+    - { role: holms.fqdn }
 
   tasks:
     - name: Make sure we have a wheel group

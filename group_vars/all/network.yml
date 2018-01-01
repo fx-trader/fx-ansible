@@ -1,4 +1,4 @@
 ---
-domain_name: fxhistoricaldata.com
+domainname: fxhistoricaldata.com
 hostname: "{{ ansible_hostname }}"
-fqdn: "{{ hostname }}.{{ domain_name }}"
+fqdn: "{{ hostname }}.{{ domainname }}"

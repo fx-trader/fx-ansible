@@ -32,3 +32,9 @@
         - fxtrader/finance-api-data
         - redis
         - mysqludf/ta
+
+    - name: Setup sysctl domainname
+      sysctl:
+        name: kernel.domainname
+        value: "{{ domainname }}"
+        state: present

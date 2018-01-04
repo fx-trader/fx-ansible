@@ -8,6 +8,7 @@
     - { role: singleplatform-eng.users }
     - { role: willshersystems.sshd }
     - { role: geerlingguy.docker }
+    - { role: holms.fqdn }
 
   tasks:
     - name: Make sure we have a wheel group
@@ -31,3 +32,9 @@
         - fxtrader/finance-api-data
         - redis
         - mysqludf/ta
+
+    - name: Setup sysctl domainname
+      sysctl:
+        name: kernel.domainname
+        value: "{{ domainname }}"
+        state: present

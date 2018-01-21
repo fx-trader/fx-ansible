@@ -11,6 +11,7 @@
     - { role: holms.fqdn }
     - { role: geerlingguy.nginx }
     - { role: fx.api.frontend }
+    - { role: fx.datafeed }
 
   tasks:
     - name: Make sure we have a wheel group
@@ -30,10 +31,8 @@
       docker_image:
         name: "{{ item }}"
       with_items:
-        - fxtrader/finance-hostedtrader
         - fxtrader/finance-api-data
         - redis
-        - mysqludf/ta
 
     - name: Setup sysctl domainname
       sysctl:

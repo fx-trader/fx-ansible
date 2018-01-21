@@ -1,7 +1,7 @@
 ---
 # tasks file for fx.datafeed
 
-- name: Download fx.datafeed docker images
+- name: Download {{role_path|basename}} docker images
   docker_image:
     name: "{{ item }}"
   with_items:

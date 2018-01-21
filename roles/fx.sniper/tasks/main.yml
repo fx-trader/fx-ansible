@@ -1,2 +1,9 @@
 ---
 # tasks file for fx.sniper
+
+- name: Download {{role_path|basename}} docker images
+  docker_image:
+    name: "{{ item }}"
+  with_items:
+    - fxtrader/finance-hostedtrader
+    - redis

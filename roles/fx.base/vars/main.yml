@@ -1,2 +1,10 @@
 ---
 # vars file for fx.base
+
+fx:
+  basedir: /root
+  datafeed:
+    dbhost: fxdata
+    dbname: fxdata
+    dbuser: fxdata
+    dbpass: fxdata

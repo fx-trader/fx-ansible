@@ -1,2 +1,17 @@
 ---
 # tasks file for fx.base
+- name: Create fxtrader.cfg directory
+  file:
+    path:  "{{ fx['basedir'] }}/fxtrader.cfg"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Setup fx.yml config file
+  template:
+    src: fx.yml.j2
+    dest: "{{ fx['basedir'] }}/fxtrader.cfg/fx.yml"
+    owner: root
+    group: root
+    mode: 0644

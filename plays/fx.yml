@@ -9,6 +9,11 @@
     - { role: singleplatform-eng.users }
     - { role: willshersystems.sshd }
     - { role: holms.fqdn }
+    - { role: geerlingguy.nginx }
+
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
 
   tasks:
     - name: Make sure we have a wheel group
@@ -38,3 +43,33 @@
         name: kernel.domainname
         value: "{{ domainname }}"
         state: present
+
+    - name: Configure nginx
+      template:
+        src: templates/nginx/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+      - restart nginx
+
+    - name: Configure nginx default vhost
+      template:
+        src: templates/nginx/conf.d/default.conf.j2
+        dest: /etc/nginx/conf.d/default.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+      - restart nginx
+
+    - name: Configure nginx api.fxhistoricaldata.com vhost
+      template:
+        src: templates/nginx/conf.d/api.conf.j2
+        dest: /etc/nginx/conf.d/api.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+      - restart nginx

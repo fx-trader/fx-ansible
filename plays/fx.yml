@@ -5,9 +5,9 @@
   become: True
 
   roles:
+    - { role: geerlingguy.docker }
     - { role: singleplatform-eng.users }
     - { role: willshersystems.sshd }
-    - { role: geerlingguy.docker }
     - { role: holms.fqdn }
 
   tasks:

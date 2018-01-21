@@ -2,3 +2,4 @@
 - src: willshersystems.sshd
 - src: geerlingguy.docker
 - src: holms.fqdn
+- src: geerlingguy.nginx

@@ -13,6 +13,7 @@
     - { role: fx.api.frontend }
     - { role: fx.datafeed }
     - { role: fx.api.backend }
+    - { role: fx.sniper }
 
   tasks:
     - name: Make sure we have a wheel group
@@ -27,12 +28,6 @@
         regexp: '^%wheel'
         line: '%wheel ALL=(ALL) NOPASSWD: ALL'
         validate: visudo -cf %s
-
-    - name: Download docker images
-      docker_image:
-        name: "{{ item }}"
-      with_items:
-        - redis
 
     - name: Setup sysctl domainname
       sysctl:

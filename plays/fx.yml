@@ -12,6 +12,7 @@
     - { role: geerlingguy.nginx }
     - { role: fx.api.frontend }
     - { role: fx.datafeed }
+    - { role: fx.api.backend }
 
   tasks:
     - name: Make sure we have a wheel group
@@ -31,7 +32,6 @@
       docker_image:
         name: "{{ item }}"
       with_items:
-        - fxtrader/finance-api-data
         - redis
 
     - name: Setup sysctl domainname

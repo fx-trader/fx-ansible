@@ -1,2 +1,22 @@
 ---
 # tasks file for fx.api.backend
+
+- name: Download {{role_path|basename}} docker images
+  docker_image:
+    name: "{{ item }}"
+  with_items:
+    - fxtrader/finance-api-data
+
+- name: fxapi-data container
+  docker_container:
+    name: fxapi-data
+    image: fxtrader/finance-api-data
+    volumes:
+      - /root/fxtrader.cfg:/etc/fxtrader
+    published_ports:
+      - 5000:5000
+    links:
+      - fxdata:fxdata
+    restart_policy: always
+    state: started
+    command: "starman --workers 2 /webapp/bin/app.psgi"

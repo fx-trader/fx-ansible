@@ -10,6 +10,7 @@
   with_items:
     - "{{fx['cfgdir']}}"
     - "{{fx['datadir']}}"
+    - "{{fx['initdir']}}"
 
 - name: Setup fx.yml config file
   template:

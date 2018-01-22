@@ -1,13 +1,16 @@
 ---
 # tasks file for fx.datafeed
 
-- name: Create datafeed mariadb cfg directory
+- name: Create datafeed mariadb directories
   file:
-    path:  "{{ datafeed['cfgdir'] }}"
+    path:  "{{ item }}"
     state: directory
     owner: root
     group: root
     mode: 0755
+  with_items:
+    - "{{ datafeed['cfgdir'] }}"
+    - "{{ datafeed['datadir'] }}"
 
 - name: Setup datafeed mariadb config files
   copy:
@@ -24,9 +27,9 @@
   docker_image:
     name: mysqludf/ta
 
-- name: fxdata container
+- name: fxdatafeed container
   docker_container:
-    name: fxdata
+    name: fxdatafeed
     image: mysqludf/ta
     volumes:
       - "{{datafeed['datadir']}}:/var/lib/mysql"
@@ -44,14 +47,14 @@
   docker_image:
     name: fxtrader/finance-hostedtrader
 
-- name: fxdata schema
+- name: fxdatafeed schema
   docker_container:
-    name: fxdataschema
+    name: fxdatafeedschema
     image: fxtrader/finance-hostedtrader
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader"
     links:
-      - fxdata:fxdata
+      - fxdatafeed:fxdatafeed
     command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
     state: started
 
@@ -62,7 +65,7 @@
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader"
     links:
-      - fxdata:fxdata
+      - fxdatafeed:fxdatafeed
     command: "fx-download-fxcm.pl --verbose --timeframes=300 --numItems=15"
     state: present
 

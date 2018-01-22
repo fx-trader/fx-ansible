@@ -1,0 +1,12 @@
+---
+# vars file for fx.dataaccounts
+
+dataaccounts:
+  cfgdir: "{{fx['cfgdir']}}/dataaccounts"
+  datadir: "{{fx['datadir']}}/dataaccounts"
+  initdir: "{{fx['initdir']}}/dataaccounts"
+  db:
+    name: accounts
+    user: accounts
+    pass: accounts
+

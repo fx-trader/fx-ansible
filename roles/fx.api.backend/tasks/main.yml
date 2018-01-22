@@ -16,7 +16,7 @@
     published_ports:
       - 5000:5000
     links:
-      - fxdata:fxdata
+      - fxdatafeed:fxdatafeed
     restart_policy: always
     state: started
     command: "starman --workers 2 /webapp/bin/app.psgi"

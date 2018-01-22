@@ -3,6 +3,7 @@
 
 fx:
   basedir: /root
+  cfgdir: /root/fxtrader.cfg
   datafeed:
     dbhost: fxdata
     dbname: fxdata

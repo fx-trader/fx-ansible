@@ -13,9 +13,9 @@
     name: fxdata
     image: mysqludf/ta
     volumes:
-      - /root/mysql:/var/lib/mysql
-      - /root/fxtrader.cfg/mariadb:/etc/mysql/conf.d
-      - /root/src:/root/src
+      - "{{fx['basedir']}}/mysql:/var/lib/mysql"
+      - "{{fx['cfgdir']}}/mariadb:/etc/mysql/conf.d"
+      - "{{fx['basedir']}}/src:/root/src"
     hostname: data
     state: started
     env:
@@ -29,7 +29,7 @@
     name: fxcmfeed
     image: fxtrader/finance-hostedtrader
     volumes:
-      - /root/fxtrader.cfg:/etc/fxtrader
+      - "{{fx['cfgdir']}}:/etc/fxtrader"
     links:
       - fxdata:fxdata
     command: "fx-download-fxcm.pl --verbose --timeframes=300 --numItems=15"

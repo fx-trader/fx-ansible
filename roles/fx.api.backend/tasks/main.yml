@@ -12,7 +12,7 @@
     name: fxapi-data
     image: fxtrader/finance-api-data
     volumes:
-      - /root/fxtrader.cfg:/etc/fxtrader
+      - "{{fx['cfgdir']}}:/etc/fxtrader"
     published_ports:
       - 5000:5000
     links:

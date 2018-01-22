@@ -34,3 +34,11 @@
       - fxdata:fxdata
     command: "fx-download-fxcm.pl --verbose --timeframes=300 --numItems=15"
     state: present
+
+- name: fxcm data download cronjob
+  copy:
+    src: cron.d/fxcm_download_data
+    dest: /etc/cron.d/fxcm_download_data
+    owner: root
+    group: root
+    mode: 0644

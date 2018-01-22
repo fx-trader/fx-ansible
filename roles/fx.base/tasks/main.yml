@@ -15,3 +15,11 @@
     owner: root
     group: root
     mode: 0644
+
+- name: Setup fxtrader.log.conf file
+  copy:
+    src: fxtrader.log.conf
+    dest: "{{ fx['basedir'] }}/fxtrader.cfg/fxtrader.log.conf"
+    owner: root
+    group: root
+    mode: 0644

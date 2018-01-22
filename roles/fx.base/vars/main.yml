@@ -2,8 +2,10 @@
 # vars file for fx.base
 
 fx:
-  basedir: /root
-  cfgdir: /root/fxtrader.cfg
+  srcdir: /root/src
+  basedir: /root/fx
+  cfgdir: /root/fx/cfg/fxtrader.cfg
+  datadir: /root/fx/data/fxtrader.cfg
   datafeed:
     dbhost: fxdata
     dbname: fxdata

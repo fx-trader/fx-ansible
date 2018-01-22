@@ -1,2 +1,6 @@
 ---
 # vars file for fx.datafeed
+
+datafeed:
+  cfgdir: "{{fx['cfgdir']}}/datafeed"
+  datadir: "{{fx['datadir']}}/datafeed"

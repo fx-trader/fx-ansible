@@ -2,11 +2,14 @@
 # tasks file for fx.base
 - name: Create fxtrader.cfg directory
   file:
-    path:  "{{ fx['cfgdir'] }}"
+    path:  "{{ item }}"
     state: directory
     owner: root
     group: root
     mode: 0755
+  with_items:
+    - "{{fx['cfgdir']}}"
+    - "{{fx['datadir']}}"
 
 - name: Setup fx.yml config file
   template:

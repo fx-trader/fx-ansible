@@ -39,9 +39,9 @@
     state: started
     env:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: "{{ fx['datafeed']['dbname'] }}"
-      MYSQL_USER: "{{ fx['datafeed']['dbuser'] }}"
-      MYSQL_PASSWORD: "{{ fx['datafeed']['dbpass'] }}"
+      MYSQL_DATABASE: "{{ datafeed['db']['name'] }}"
+      MYSQL_USER: "{{ datafeed['db']['user'] }}"
+      MYSQL_PASSWORD: "{{ datafeed['db']['pass'] }}"
 
 - name: Download {{role_path|basename}} fxtrader/finance-hostedtrader
   docker_image:

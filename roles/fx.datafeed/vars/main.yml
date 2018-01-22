@@ -4,3 +4,7 @@
 datafeed:
   cfgdir: "{{fx['cfgdir']}}/datafeed"
   datadir: "{{fx['datadir']}}/datafeed"
+  db:
+    name: fxdatafeed
+    user: fxdatafeed
+    pass: fxdatafeed

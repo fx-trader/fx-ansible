@@ -1,0 +1,85 @@
+# Purpose
+This document describes how to bootstrap the development and production instances of the fxtrader system
+
+# PreRequisites
+
+## SELINUX
+    sudo yum -y update
+    sudo sed -i '/^SELINUX=/c\SELINUX=disabled' /etc/selinux/config
+    sudo init 6
+
+## git
+    yum -y install git
+    ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+## Python ansible dependencies
+    yum -y install python-docker-py
+    curl "https://bootstrap.pypa.io/get-pip.py" | python
+    pip install docker-py
+
+## Ansible
+    yum -y install ansible
+    mkdir ~/src && cd ~/src
+    git clone git@github.com:fx-trader/fx-ansible.git
+    cd ~/src/fx-ansible/plays
+    ansible-galaxy install -r ../roles/roles_requirements.yml
+    ansible-playbook -i ../production.ini fx.yml
+
+# Get some personal config files
+    git clone https://github.com/joaocosta/home.git ~/src/home
+    cp ~/src/home/.bash_aliases ~  #Edit and change fxdata password
+    cp ~/src/home/.gitconfig ~
+    cp ~/src/home/.vimrc ~
+
+# Database
+
+The database instance runs inside a docker container. It includes a mysql udf binary optimised to run finance calculations (https://github.com/jo#
+
+## Populate data
+    fx-shell
+    /usr/local/bin/fx-download-fxcm.pl --timeframes=300 --numItems=150000 --verbose
+    exit
+
+# Get fx-snipers repo
+    mkdir src
+    cd src
+    git clone git@github.com:fx-trader/Finance-snipers.git
+
+    cat<<EOF>/root/fxcm.real
+    export FXCM_USERNAME=89005525
+    export FXCM_PASSWORD=XXXXX
+    export FXCM_ACCOUNT_TYPE=Real
+    EOF
+
+---
+
+# HOWTO
+
+## MySql client shell
+    docker run  -it --rm \
+                --link fxdata:mysql \
+                mariadb \
+                sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+
+## Dev container
+make sure mydevapi.fxhistoricaldata.com is mapped to the VM in /etc/hosts
+Access at http://mydevapi.fxhistoricaldata.com/indicator?t=5min&e=ema(close,200)&s=XAGUSD&d=5&l=10000.
+
+docker run  --rm \
+            -ti \
+            -v /root/src:/src \
+            -v /root/fxtrader.cfg:/etc/fxtrader \
+            -v /usr/share/nginx/html/fxapi:/public_html \
+            -e PERL5LIB=/src/Finance-HostedTrader/lib \
+            -e PATH=/src/Finance-HostedTrader/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/root/bin \
+            -p 5002:5000 \
+            --link fxdata:fxdata \
+            fxtrader/finance-api-data \
+            bash # Then run plackup /src/Finance-API-Data/bin/app.psgi
+
+
+## Optimize mariadb tables
+
+    docker exec -ti fxapi-data bash
+    time fx-all-tables.pl --timeframes=300 --template="REPAIR TABLE TABLE_NAME;" | fx-db-client.pl.
+    time fx-all-tables.pl --timeframes=300 --template="OPTIMIZE TABLE TABLE_NAME;" | fx-db-client.pl.

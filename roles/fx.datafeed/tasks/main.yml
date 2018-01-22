@@ -20,12 +20,9 @@
     - mysqld_safe_syslog.cnf
     - fxtrader.cnf
 
-- name: Download {{role_path|basename}} docker images
+- name: Download {{role_path|basename}} mysqludf/ta
   docker_image:
-    name: "{{ item }}"
-  with_items:
-    - fxtrader/finance-hostedtrader
-    - mysqludf/ta
+    name: mysqludf/ta
 
 - name: fxdata container
   docker_container:
@@ -42,6 +39,10 @@
       MYSQL_DATABASE: "{{ fx['datafeed']['dbname'] }}"
       MYSQL_USER: "{{ fx['datafeed']['dbuser'] }}"
       MYSQL_PASSWORD: "{{ fx['datafeed']['dbpass'] }}"
+
+- name: Download {{role_path|basename}} fxtrader/finance-hostedtrader
+  docker_image:
+    name: fxtrader/finance-hostedtrader
 
 - name: fxdata schema
   docker_container:

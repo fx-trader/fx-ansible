@@ -3,6 +3,10 @@ This document describes how to bootstrap the development and production instance
 
 # PreRequisites
 
+## OS
+
+CentOS 7
+
 ## SELINUX
     sudo yum -y update
     sudo sed -i '/^SELINUX=/c\SELINUX=disabled' /etc/selinux/config

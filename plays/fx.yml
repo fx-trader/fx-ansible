@@ -5,11 +5,6 @@
   become: True
 
   roles:
-    - { role: geerlingguy.docker }
-    - { role: singleplatform-eng.users }
-    - { role: willshersystems.sshd }
-    - { role: holms.fqdn }
-    - { role: geerlingguy.nginx }
     - { role: fx.api.frontend }
     - { role: fx.datafeed }
     - { role: fx.api.backend }

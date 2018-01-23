@@ -30,3 +30,18 @@
         name: kernel.domainname
         value: "{{ domainname }}"
         state: present
+
+    - name: Download redis docker images
+      docker_image:
+        name: "{{ item }}"
+      with_items:
+        - redis
+
+    - name: signal-scan-redis container
+      docker_container:
+        name: signal-scan-redis
+        image: redis
+        volumes:
+          - "{{fx['datadir']}}/signal-scan-redis:/data"
+        state: started
+        command: "redis-server --appendonly yes"

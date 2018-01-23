@@ -72,7 +72,7 @@ Access at http://mydevapi.fxhistoricaldata.com/indicator?t=5min&e=ema(close,200)
 docker run  --rm \
             -ti \
             -v /root/src:/src \
-            -v /root/fxtrader.cfg:/etc/fxtrader \
+            -v /root/fx/cfg:/etc/fxtrader \
             -v /usr/share/nginx/html/fxapi:/public_html \
             -e PERL5LIB=/src/Finance-HostedTrader/lib \
             -e PATH=/src/Finance-HostedTrader/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/root/bin \

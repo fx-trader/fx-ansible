@@ -1,6 +1,6 @@
 ---
 # tasks file for fx.base
-- name: Create fxtrader.cfg directory
+- name: Create fx directories
   file:
     path:  "{{ item }}"
     state: directory

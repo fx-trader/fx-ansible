@@ -7,3 +7,7 @@
 */5 21-23 * * 0 root sleep 3 && docker start fxcmfeed | grep -v fxcmfeed
 */5 * * * 1-4 root sleep 3 && docker start fxcmfeed | grep -v fxcmfeed
 */5 0-21 * * 5 root sleep 3 && docker start fxcmfeed | grep -v fxcmfeed
+
+* 21-23 * * 0 root docker run -t --rm --link fxdatafeed:mysql -v $HOME/fx/cfg:/etc/fxtrader -v ~/src:/src fxtrader/finance-hostedtrader fx-demo-oanda.pl >> /root/account.stats
+* * * * 1-4 root docker run -t --rm --link fxdatafeed:mysql -v $HOME/fx/cfg:/etc/fxtrader -v ~/src:/src fxtrader/finance-hostedtrader fx-demo-oanda.pl >> /root/account.stats
+* 0-21 * * 5 root docker run -t --rm --link fxdatafeed:mysql -v $HOME/fx/cfg:/etc/fxtrader -v ~/src:/src fxtrader/finance-hostedtrader fx-demo-oanda.pl >> /root/account.stats

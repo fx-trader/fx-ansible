@@ -1,0 +1,16 @@
+---
+# tasks file for fx.smtp
+- name: Download {{role_path|basename}} docker images
+  docker_image:
+    name: "{{ item }}"
+  with_items:
+    - mwader/postfix-relay
+
+- name: smtp container
+  docker_container:
+    name: smtp
+    image: mwader/postfix-relay
+    env:
+      - POSTFIX_myhostname: smtp.fxhistoricaldata.com
+    restart_policy: always
+    state: started

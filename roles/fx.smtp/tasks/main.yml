@@ -11,6 +11,6 @@
     name: smtp
     image: mwader/postfix-relay
     env:
-      - POSTFIX_myhostname: smtp.fxhistoricaldata.com
+      POSTFIX_myhostname: smtp.fxhistoricaldata.com
     restart_policy: always
     state: started

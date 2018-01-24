@@ -54,3 +54,4 @@ galaxy_info:
 
 dependencies:
   - fx.base
+  - fx.smtp

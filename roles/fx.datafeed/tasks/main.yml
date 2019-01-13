@@ -58,17 +58,6 @@
     command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
     state: started
 
-- name: fxfeed container
-  docker_container:
-    name: fxcmfeed
-    image: fxtrader/finance-hostedtrader
-    volumes:
-      - "{{fx['cfgdir']}}:/etc/fxtrader"
-    links:
-      - fxdatafeed:fxdatafeed
-    command: "fx-download-fxcm.pl --verbose --timeframes=300 --numItems=15"
-    state: present
-
 - name: fxcm data download cronjob
   copy:
     src: cron.d/fxcm_download_data

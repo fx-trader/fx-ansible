@@ -41,7 +41,7 @@ The database instance runs inside a docker container. It includes a mysql udf bi
 
 ## Populate data
     fx-shell
-    /usr/local/bin/fx-download-fxcm.pl --timeframes=300 --numItems=150000 --verbose
+    /usr/local/bin/fx-download.pl --timeframes=300 --numItems=150000 --verbose
     exit
 
 # Get fx-snipers repo

@@ -1,116 +1,3 @@
-symbols:
-    natural:
-        - AUDUSD
-        - AUDCHF
-        - AUDJPY
-        - AUDNZD
-        - CHFJPY
-        - EURCAD
-        - EURCHF
-        - EURGBP
-        - EURJPY
-        - EURUSD
-        - GBPAUD
-        - GBPCAD
-        - GBPCHF
-        - GBPJPY
-        - GBPNZD
-        - GBPUSD
-        - NZDUSD
-        - NZDJPY
-        - USDCAD
-        - USDCHF
-        - USDHKD
-        - USDJPY
-        - XAUUSD
-        - XAGUSD
-        - AUS200
-        - ESP35
-        - FRA40
-        - GER30
-        - HKG33
-        - JPN225
-        - NAS100
-        - SPX500
-#        - SUI30
-#        - SWE30
-        - UK100
-        - UKOil
-        - US30
-        - USOil
-#        - Copper
-#        - XPTUSD
-        - USDOLLAR
-#        - NGAS
-        - Bund
-        - Wheat
-#        - EUSTX50
-    synthetic:
-        GER30USD:
-            op: "*"
-            leftop: GER30
-            rightop: EURUSD
-        BundUSD:
-            op: "*"
-            leftop: Bund
-            rightop: EURUSD
-        FRA40USD:
-            op: "*"
-            leftop: FRA40
-            rightop: EURUSD
-        AUS200USD:
-            op: "*"
-            leftop: AUS200
-            rightop: AUDUSD
-        ESP35USD:
-            op: "*"
-            leftop: ESP35
-            rightop: EURUSD
-        UK100USD:
-            op: "*"
-            leftop: UK100
-            rightop: GBPUSD
-        UKOilUSD:
-            op: "*"
-            leftop: UKOil
-            rightop: GBPUSD
-#        EUSTX50USD:
-#            op: "*"
-#            leftop: EUSTX50
-#            rightop: EURUSD
-        HKG33USD:
-            op: "/"
-            leftop: HKG33
-            rightop: USDHKD
-        JPN225USD:
-            op: "/"
-            leftop: JPN225
-            rightop: USDJPY
-        GBPEUR:
-            op: "/"
-            leftop: 1
-            rightop: EURGBP
-        USDEUR:
-            op: "/"
-            leftop: 1
-            rightop: EURUSD
-        CHFEUR:
-            op: "/"
-            leftop: 1
-            rightop: EURCHF
-        JPYEUR:
-            op: "/"
-            leftop: 1
-            rightop: EURJPY
-        GBPHKD:
-            op: "*"
-            leftop: GBPUSD
-            rightop: USDHKD
-        XAGEUR:
-            op: "/"
-            leftop: XAGUSD
-            rightop: EURUSD
-
 timeframes:
     natural:
         - 300
@@ -129,11 +16,37 @@ db:
     dbname: {{ fx['datafeed']['dbname'] }}
     dbuser: {{ fx['datafeed']['dbuser'] }}
     dbpasswd: {{ fx['datafeed']['dbpass'] }}
+defaultProvider: oanda
 providers:
     fxcm:
         username: D25695585
         password: 945
         accountType: Demo
     oanda:
-        accountid: 001-004-221857-001
-        token: /etc/fxtrader/oanda.token
+        account_id: 001-004-221857-001
+        token_file: /etc/fxtrader/oanda.token
+        synthetic:
+            DE30_USD:
+                op: "*"
+                leftop: DE30_EUR
+                rightop: EUR_USD
+            JP225_USD:
+                op: "/"
+                leftop: JP225_JPY
+                rightop: USD_JPY
+            GBP_EUR:
+                op: "/"
+                leftop: 1
+                rightop: EUR_GBP
+            USD_EUR:
+                op: "/"
+                leftop: 1
+                rightop: EUR_USD
+            CHF_EUR:
+                op: "/"
+                leftop: 1
+                rightop: EUR_CHF
+            JPY_EUR:
+                op: "/"
+                leftop: 1
+                rightop: EUR_JPY

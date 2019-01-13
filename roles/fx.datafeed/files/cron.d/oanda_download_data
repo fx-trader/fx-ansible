@@ -1,0 +1,9 @@
+# These jobs run a datafeed that keeps the mariadb database data up to date.
+#
+## Note 1:
+### If for some reason the feed stops running and there is a need to catch up and download older data, use fx-shell and run:
+### fx-download.pl --timeframes=300 --numItems=1440 --verbose --provider=oanda
+
+*/5 21-23 * * 0 root sleep 3 && docker start oandafeed | grep -v oandafeed
+*/5 * * * 1-4 root sleep 3 && docker start oandafeed | grep -v oandafeed
+*/5 0-21 * * 5 root sleep 3 && docker start oandafeed | grep -v oandafeed

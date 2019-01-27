@@ -25,6 +25,40 @@ providers:
     oanda:
         account_id: 001-004-221857-001
         token_file: /etc/fxtrader/oanda.token
+        endpoint_hosts:
+            rest: api-fxtrade.oanda.com
+            stream: stream-fxtrade.oanda.com
+        synthetic:
+            DE30_USD:
+                op: "*"
+                leftop: DE30_EUR
+                rightop: EUR_USD
+            JP225_USD:
+                op: "/"
+                leftop: JP225_JPY
+                rightop: USD_JPY
+            GBP_EUR:
+                op: "/"
+                leftop: 1
+                rightop: EUR_GBP
+            USD_EUR:
+                op: "/"
+                leftop: 1
+                rightop: EUR_USD
+            CHF_EUR:
+                op: "/"
+                leftop: 1
+                rightop: EUR_CHF
+            JPY_EUR:
+                op: "/"
+                leftop: 1
+                rightop: EUR_JPY
+    oanda_demo:
+        account_id: 101-004-10091587-001
+        token_file: /etc/fxtrader/oanda_demo.token
+        endpoint_hosts:
+            rest: api-fxpractice.oanda.com
+            stream: stream-fxpractice.oanda.com
         synthetic:
             DE30_USD:
                 op: "*"

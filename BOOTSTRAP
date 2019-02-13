@@ -55,6 +55,11 @@ The database instance runs inside a docker container. It includes a mysql udf bi
     export FXCM_ACCOUNT_TYPE=Real
     EOF
 
+# Get fxhistoricaldata static website
+    cd ~/src
+    #git clone https://github.com/fx-trader/fxhistoricaldata_website_static.git
+    git clone git@github.com:fx-trader/fxhistoricaldata_website_static.git
+
 ---
 
 # HOWTO

@@ -1,8 +1,6 @@
 [local]
 local_user  ansible_connection=local ansible_become=false
 
-# This is inventory file for production stage
-
 [datafeed]
 localhost
 
@@ -13,5 +11,3 @@ localhost
 localhost
 
 [all:vars]
-# Sets the environment to development(dev) or production (prod) or test
-environment=prod

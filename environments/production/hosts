@@ -3,11 +3,14 @@ local_user  ansible_connection=local ansible_become=false
 
 # This is inventory file for production stage
 
-#[webservers]
-#webserver[000:004].prod.example.com
-#
-#[postgresql]
-#postgresql[000:000].prod.example.com
+[datafeed]
+localhost
+
+[api-backend]
+localhost
+
+[api-frontend]
+localhost
 
 [all:vars]
 # Sets the environment to development(dev) or production (prod) or test

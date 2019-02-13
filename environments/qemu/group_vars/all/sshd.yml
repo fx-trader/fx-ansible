@@ -1,5 +1,5 @@
 ---
 sshd:
-  PermitRootLogin: no
+  PermitRootLogin: yes
   PasswordAuthentication: no
   GSSAPIAuthentication: no

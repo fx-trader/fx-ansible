@@ -1,13 +1,10 @@
-[local]
-local_user  ansible_connection=local ansible_become=false
-
 [datafeed]
-localhost
+localhost              ansible_connection=local
 
 [api-backend]
-localhost
+localhost              ansible_connection=local
 
 [api-frontend]
-localhost
+localhost              ansible_connection=local
 
 [all:vars]

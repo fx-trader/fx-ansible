@@ -2,7 +2,6 @@
 
 - name: Setup fx server
   hosts: all
-  become: True
 
   roles:
     - { role: fx.api.frontend }
@@ -24,12 +23,6 @@
         regexp: '^%wheel'
         line: '%wheel ALL=(ALL) NOPASSWD: ALL'
         validate: visudo -cf %s
-
-    - name: Setup sysctl domainname
-      sysctl:
-        name: kernel.domainname
-        value: "{{ domainname }}"
-        state: present
 
     - name: Download redis docker images
       docker_image:

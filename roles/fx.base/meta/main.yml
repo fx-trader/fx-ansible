@@ -56,4 +56,3 @@ dependencies:
   - geerlingguy.docker
   - singleplatform-eng.users
   - willshersystems.sshd
-  - holms.fqdn

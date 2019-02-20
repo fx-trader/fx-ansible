@@ -20,3 +20,18 @@
     restart_policy: always
     state: started
     command: "starman --workers 2 /webapp/bin/app.psgi"
+
+- name: fxapi-data-dev container
+  docker_container:
+    name: fxapi-data-dev
+    image: fxtrader/finance-api-data
+    volumes:
+      - "{{fx['cfgdir']}}:/etc/fxtrader"
+      - "~/src:/src"
+    published_ports:
+      - 6000:5000
+    links:
+      - fxdatafeed:fxdatafeed
+    restart_policy: always
+    state: started
+    command: "plackup -s Starman /src/Finance-API-Data/bin/app.psgi"

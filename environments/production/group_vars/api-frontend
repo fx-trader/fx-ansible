@@ -1,0 +1,9 @@
+---
+nginx:
+  hostname: api.fxhistoricaldata.com
+  port: 80
+  proxy_pass:
+    - location: "/"
+      backend: "http://localhost:5000/"
+    - location: "/dev"
+      backend: "http://localhost:6000/"

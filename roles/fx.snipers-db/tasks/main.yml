@@ -1,0 +1,43 @@
+---
+# tasks file for fx.snipers-db
+
+- name: Create snipers-db directories to store postgres configuration and data
+  file:
+    path:  "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ snipers['cfgdir'] }}"
+    - "{{ snipers['datadir'] }}"
+
+- name: Download {{role_path|basename}} postgresql image
+  docker_image:
+    name: postgres
+    source: pull
+
+- name: snipers-db container
+  docker_container:
+    name: snipers-db
+    image: postgres
+    volumes:
+      - "{{snipers['datadir']}}:/var/lib/postgresql/data"
+      - "{{fx['srcdir']}}:/root/src"
+    hostname: "{{ snipers['db']['hostname'] }}"
+    state: started
+    env:
+      POSTGRES_USER: "{{ snipers['db']['user'] }}"
+      POSTGRES_PASSWORD: "{{ snipers['db']['pass'] }}"
+      POSTGRES_DB: "{{ snipers['db']['name'] }}"
+
+#- name: snipers-db schema
+#  docker_container:
+#    name: fxdatafeedschema
+#    image: fxtrader/finance-hostedtrader
+#    volumes:
+#      - "{{fx['cfgdir']}}:/etc/fxtrader"
+#    links:
+#      - fxdatafeed:fxdatafeed
+#    command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
+#    state: started

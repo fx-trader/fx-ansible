@@ -1,0 +1,11 @@
+---
+# vars file for fx.datafeed
+
+snipers:
+  cfgdir: "{{fx['cfgdir']}}/snipers"
+  datadir: "{{fx['datadir']}}/snipers"
+  db:
+    hostname: snipers-db
+    name: snipers
+    user: sniper
+    pass: pwd

@@ -8,7 +8,6 @@
     - { role: fx.datafeed }
     - { role: fx.api.backend }
     - { role: fx.sniper }
-    - { role: fx.dataaccounts }
 
   tasks:
     - name: Make sure we have a wheel group

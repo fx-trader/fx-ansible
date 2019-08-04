@@ -1,0 +1,21 @@
+---
+- name: Download {{role_path|basename}} docker images
+  docker_image:
+    name: "{{ item }}"
+    source: pull
+  with_items:
+    - fxtrader/snipers-api
+
+- name: snipers-api container
+  docker_container:
+    name: snipers-api
+    image: fxtrader/snipers-api
+    volumes:
+      - "{{fx['cfgdir']}}:/etc/fxtrader"
+    published_ports:
+      - 5567:4567
+    links:
+      - snipers-db:snipers-db
+    restart_policy: always
+    state: started
+    command: "ruby /webapp/app.rb -o 0.0.0.0"

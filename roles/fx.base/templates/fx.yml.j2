@@ -9,7 +9,6 @@ timeframes:
         - 14400
         - 86400
         - 604800
-        - 18144000
     synthetic:
 db:
     dbhost: {{ fx['datafeed']['dbhost'] }}
@@ -29,10 +28,6 @@ providers:
             rest: api-fxtrade.oanda.com
             stream: stream-fxtrade.oanda.com
         synthetic:
-            DE30_USD:
-                op: "*"
-                leftop: DE30_EUR
-                rightop: EUR_USD
             NATGAS_SUGAR:
                 op: "/"
                 leftop: NATGAS_USD
@@ -64,10 +59,6 @@ providers:
             rest: api-fxpractice.oanda.com
             stream: stream-fxpractice.oanda.com
         synthetic:
-            DE30_USD:
-                op: "*"
-                leftop: DE30_EUR
-                rightop: EUR_USD
             NATGAS_SUGAR:
                 op: "/"
                 leftop: NATGAS_USD

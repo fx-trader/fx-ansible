@@ -75,7 +75,7 @@
       - "{{fx['cfgdir']}}:/etc/fxtrader"
     links:
       - fxdatafeed:fxdatafeed
-    command: "fx-download.pl --verbose --timeframes=300 --numItems=15 --provider=oanda"
+    command: "fx-download.pl --verbose --timeframes=60 --numItems=15 --provider=oanda"
     state: present
 
 - name: oanda data download cronjob

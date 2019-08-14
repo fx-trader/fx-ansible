@@ -26,17 +26,17 @@
         line: '%wheel ALL=(ALL) NOPASSWD: ALL'
         validate: visudo -cf %s
 
-    - name: Download redis docker images
-      docker_image:
-        name: "{{ item }}"
-      with_items:
-        - redis
+#    - name: Download redis docker images
+#      docker_image:
+#        name: "{{ item }}"
+#      with_items:
+#        - redis
 
-    - name: signal-scan-redis container
-      docker_container:
-        name: signal-scan-redis
-        image: redis
-        volumes:
-          - "{{fx['datadir']}}/signal-scan-redis:/data"
-        state: started
-        command: "redis-server --appendonly yes"
+#    - name: signal-scan-redis container
+#      docker_container:
+#        name: signal-scan-redis
+#        image: redis
+#        volumes:
+#          - "{{fx['datadir']}}/signal-scan-redis:/data"
+#        state: started
+#        command: "redis-server --appendonly yes"

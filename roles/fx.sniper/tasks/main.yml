@@ -6,4 +6,4 @@
     name: "{{ item }}"
   with_items:
     - fxtrader/finance-hostedtrader
-    - redis
+#    - redis

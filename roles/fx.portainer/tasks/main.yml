@@ -1,0 +1,31 @@
+---
+- name: Download {{role_path|basename}} docker images
+  docker_image:
+    name: "{{ item }}"
+    source: pull
+  with_items:
+    - portainer/portainer
+
+- name: portainer container
+  docker_container:
+    name: portainer
+    image: portainer/portainer
+    volumes:
+      - "{{fx['datadir']}}:/data"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    published_ports:
+      - 9000:9000
+    restart_policy: always
+    state: started
+
+- name: Configure nginx
+  template:
+    src: nginx/{{ item }}
+    dest: /etc/nginx/{{ item }}
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart nginx
+  with_items:
+    - conf.d/portainer.conf

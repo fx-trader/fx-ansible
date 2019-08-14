@@ -10,6 +10,7 @@
     - { role: fx.sniper }
     - { role: fx.snipers-db }
     - { role: fx.snipers.backend }
+    - { role: fx.portainer }
 
   tasks:
     - name: Make sure we have a wheel group

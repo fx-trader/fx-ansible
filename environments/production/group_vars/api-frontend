@@ -7,5 +7,3 @@ nginx:
       backend: "http://localhost:5000/"
     - location: "/snipers"
       backend: "http://localhost:5567/"
-    - location: "/dev"
-      backend: "http://localhost:6000/"

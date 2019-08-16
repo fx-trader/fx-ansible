@@ -4,13 +4,13 @@
   hosts: all
 
   roles:
-    - { role: fx.api.frontend }
-    - { role: fx.datafeed }
-    - { role: fx.api.backend }
-    - { role: fx.sniper }
-    - { role: fx.snipers-db }
-    - { role: fx.snipers.backend }
-    - { role: fx.portainer }
+    - { role: fx.api.frontend, tags: [ fx, api, snipers ] }
+    - { role: fx.datafeed, tags: [ fx, datafeed ]  }
+    - { role: fx.api.backend, tags: [ fx, api ]  }
+    - { role: fx.sniper, tags: [ fx ]  }
+    - { role: fx.snipers-db, tags: [ fx, snipers ]  }
+    - { role: fx.snipers.backend, tags: [ fx, snipers ]  }
+    - { role: fx.portainer, tags: [ fx, monitor ]  }
 
   tasks:
     - name: Make sure we have a wheel group

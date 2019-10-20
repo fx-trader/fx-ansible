@@ -14,13 +14,13 @@
 
 - name: Download {{role_path|basename}} postgresql image
   docker_image:
-    name: postgres
+    name: postgres:12
     source: pull
 
 - name: snipers-db container
   docker_container:
     name: snipers-db
-    image: postgres
+    image: postgres:12
     volumes:
       - "{{snipers['datadir']}}:/var/lib/postgresql/data"
       - "{{fx['srcdir']}}:/root/src"

@@ -47,6 +47,7 @@
 - name: Download {{role_path|basename}} fxtrader/finance-hostedtrader
   docker_image:
     name: fxtrader/finance-hostedtrader
+    source: pull
 
 - name: fxdatafeed schema
   docker_container:

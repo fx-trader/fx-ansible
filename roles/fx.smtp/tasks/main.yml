@@ -3,6 +3,7 @@
 - name: Download {{role_path|basename}} docker images
   docker_image:
     name: "{{ item }}"
+    source: pull
   with_items:
     - mwader/postfix-relay
 

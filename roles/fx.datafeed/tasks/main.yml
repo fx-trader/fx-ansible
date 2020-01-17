@@ -79,6 +79,17 @@
     command: "fx-download.pl --verbose --timeframes=60 --numItems=15 --provider=oanda"
     state: present
 
+- name: fxfeed oanda historical container
+  docker_container:
+    name: oandahistorical
+    image: fxtrader/finance-hostedtrader
+    volumes:
+      - "{{fx['cfgdir']}}:/etc/fxtrader"
+    links:
+      - fxdatafeed:fxdatafeed
+    command: "fx-download.pl --verbose --timeframes=60 --numItems=1440 --provider=oanda_historical"
+    state: present
+
 - name: fxfeed oanda cleanup container
   docker_container:
     name: oandacleanup

@@ -9,3 +9,5 @@
 * 0-21 * * 5 root sleep 3 && docker start oandafeed | grep -v oandafeed
 
 10 22 * * * root sleep 3 && docker start oandacleanup | grep -v oandacleanup
+
+30 23 * * * root sleep 3 && docker start oandahistorical | grep -v oandahistorical

@@ -87,7 +87,7 @@
       - "{{fx['cfgdir']}}:/etc/fxtrader"
     links:
       - fxdatafeed:fxdatafeed
-    command: "fx-download.pl --verbose --timeframes=60 --numItems=1440 --provider=oanda_historical"
+    command: "fx-download.pl --verbose --timeframes=60 --numItems=2880 --provider=oanda_historical"
     state: present
 
 - name: fxfeed oanda cleanup container

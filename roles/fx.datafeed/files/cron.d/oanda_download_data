@@ -10,4 +10,4 @@
 
 10 22 * * * root sleep 3 && docker start oandacleanup | grep -v oandacleanup
 
-30 23 * * * root sleep 3 && docker start oandahistorical | grep -v oandahistorical
+15 22 * * * root sleep 3 && docker start oandahistorical | grep -v oandahistorical

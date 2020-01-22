@@ -23,15 +23,15 @@
     - mysqld_safe_syslog.cnf
     - fxtrader.cnf
 
-- name: Download {{role_path|basename}} mysqludf/ta
+- name: Download {{role_path|basename}} fxtrader/ta
   docker_image:
-    name: mysqludf/ta
+    name: fxtrader/ta
     source: pull
 
 - name: fxdatafeed container
   docker_container:
     name: fxdatafeed
-    image: mysqludf/ta
+    image: fxtrader/ta
     volumes:
       - "{{datafeed['datadir']}}:/var/lib/mysql"
       - "{{datafeed['cfgdir']}}:/etc/mysql/conf.d"

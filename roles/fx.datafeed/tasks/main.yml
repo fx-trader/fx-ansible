@@ -35,7 +35,6 @@
     volumes:
       - "{{datafeed['datadir']}}:/var/lib/mysql"
       - "{{datafeed['cfgdir']}}:/etc/mysql/conf.d"
-      - "{{fx['srcdir']}}:/root/src"
     hostname: data
     state: started
     env:

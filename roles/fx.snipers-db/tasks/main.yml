@@ -23,7 +23,6 @@
     image: postgres:12
     volumes:
       - "{{snipers['datadir']}}:/var/lib/postgresql/data"
-      - "{{fx['srcdir']}}:/root/src"
     hostname: "{{ snipers['db']['hostname'] }}"
     state: started
     env:

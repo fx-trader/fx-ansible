@@ -4,7 +4,6 @@
 __fx_base_root_dir: /root/fx
 
 fx:
-  srcdir: "/root/src"
   basedir: "{{__fx_base_root_dir}}"
   cfgdir: "{{__fx_base_root_dir}}/cfg"
   datadir: "{{__fx_base_root_dir}}/data"

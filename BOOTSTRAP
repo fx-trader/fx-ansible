@@ -72,7 +72,7 @@ The database instance runs inside a docker container. It includes a mysql udf bi
 
 ## Dev container
 make sure mydevapi.fxhistoricaldata.com is mapped to the VM in /etc/hosts
-Access at http://mydevapi.fxhistoricaldata.com/indicator?t=5min&e=ema(close,200)&s=XAGUSD&d=5&l=10000.
+Access at http://mydevapi.fxhistoricaldata.com/indicator?t=5minute&e=ema(close,200)&s=XAGUSD&d=5&l=10000.
 
 docker run  --rm \
             -ti \

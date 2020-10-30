@@ -41,7 +41,7 @@ The database instance runs inside a docker container. It includes a mysql udf bi
 
 ## Populate data
     fx-shell
-    /usr/local/bin/fx-download.pl --timeframes=300 --numItems=150000 --verbose
+    /usr/local/bin/fx-download.pl --timeframes=60 --numItems=150000 --verbose
     exit
 
 # Get fx-snipers repo
@@ -90,5 +90,5 @@ docker run  --rm \
 ## Optimize mariadb tables
 
     docker exec -ti fxapi-data bash
-    time fx-all-tables.pl --timeframes=300 --template="REPAIR TABLE TABLE_NAME;" | fx-db-client.pl.
-    time fx-all-tables.pl --timeframes=300 --template="OPTIMIZE TABLE TABLE_NAME;" | fx-db-client.pl.
+    time fx-all-tables.pl --timeframes=60 --template="REPAIR TABLE TABLE_NAME;" | fx-db-client.pl.
+    time fx-all-tables.pl --timeframes=60 --template="OPTIMIZE TABLE TABLE_NAME;" | fx-db-client.pl.

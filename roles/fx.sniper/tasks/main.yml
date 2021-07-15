@@ -8,3 +8,15 @@
   with_items:
     - fxtrader/finance-hostedtrader
 #    - redis
+
+- name: snipers client
+  docker_container:
+    name: snipers-client
+    image: fxtrader/finance-hostedtrader
+    volumes:
+      - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
+      - "/root/src/Finance-snipers:/snipers:ro"
+    links:
+      - smtp:smtp
+    command: "sh -c 'exec /usr/bin/perl /snipers/bin/sniper-client.pl'"
+    state: started

@@ -11,7 +11,7 @@
     name: snipers-api
     image: fxtrader/snipers-api
     volumes:
-      - "{{fx['cfgdir']}}:/etc/fxtrader"
+      - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
     published_ports:
       - 5567:4567
     links:

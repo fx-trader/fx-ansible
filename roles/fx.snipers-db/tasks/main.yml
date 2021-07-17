@@ -14,13 +14,13 @@
 
 - name: Download {{role_path|basename}} postgresql image
   docker_image:
-    name: postgres:12
+    name: postgres:13
     source: pull
 
 - name: snipers-db container
   docker_container:
     name: snipers-db
-    image: postgres:12
+    image: postgres:13
     volumes:
       - "{{snipers['datadir']}}:/var/lib/postgresql/data"
     hostname: "{{ snipers['db']['hostname'] }}"
@@ -30,13 +30,14 @@
       POSTGRES_PASSWORD: "{{ snipers['db']['pass'] }}"
       POSTGRES_DB: "{{ snipers['db']['name'] }}"
 
-#- name: snipers-db schema
-#  docker_container:
-#    name: fxdatafeedschema
-#    image: fxtrader/finance-hostedtrader
-#    volumes:
-#      - "{{fx['cfgdir']}}:/etc/fxtrader"
-#    links:
-#      - fxdatafeed:fxdatafeed
-#    command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
-#    state: started
+
+# Upgrading postgres major version
+# docker rm -f snipers-db
+# mv "{{snipers['datadir']}}" "{{snipers'datadir'}}.old"
+# mkdir {{snipers['datadir']}}
+# docker run --name snipers-db-new -v {{snipers['datadir']:/var/lib/postgresql/data -e "POSTGRES_USER=$user" -e "POSTGRES_PASSWORD=$pwd" -e "POSTGRES_DB=$db" -d postgres:$new_version
+# docker run --name snipers-db-old -v {{snipers['datadir'].old:/var/lib/postgresql/data -e "POSTGRES_USER=$user" -e "POSTGRES_PASSWORD=$pwd" -e "POSTGRES_DB=$db" -d postgres:$old_version
+# docker exec snipers-db-old pg_dumpall -U $user | docker exec -i snipers-db-new psql -U $user $db
+# docker rm -f snipers-db-{new,old} snipers-db snipers-api
+# Rerun ansible to recreate snipers-db and snipers-api
+

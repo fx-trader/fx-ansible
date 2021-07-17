@@ -1,0 +1,49 @@
+settings:
+  logging: info ## Log verbosity <debug, info (default), warn, error>
+  tags: ## List of tags you want to appear in notifications for identification purposes
+    - production
+  inclusions: ## The name of any actors (containers, networks etc) you want to include in alerts
+    - smtp
+    - portainer
+    - snipers-api
+    - snipers-db
+    - fxapi-data
+    - oandafeed
+    - fxdatafeed
+
+events: ## The Docker event types that you want to trigger alerts for
+  container: 
+    - 'health_status: unhealthy'
+    - oom
+    - start
+    - stop
+    - restart
+    - die
+    - kill
+    - pause
+    - unpause
+  image: 
+    - delete
+  plugin:
+    - install
+    - remove
+  volume: 
+    - destroy
+    - create
+  network:
+    - destroy
+  daemon:
+    - reload
+  service:
+    - remove
+  node:
+    - remove
+  secret:
+    - remove
+  config:
+    - remove
+
+integrations:
+  discord:
+    enabled: True
+    url: https://discord.com/api/webhooks/865540430094925835/93oYxfcHt7_gKBHLZTcDFNP_svxiUau_SiKce2w7nUlGtSbao3E2ZZI5He0FQYxf0HFL

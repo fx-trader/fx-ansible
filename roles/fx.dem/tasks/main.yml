@@ -1,0 +1,25 @@
+---
+- name: Download {{role_path|basename}} docker images
+  docker_image:
+    name: "{{ item }}"
+    source: pull
+  with_items:
+    - quaide/dem
+
+- name: dem container
+  docker_container:
+    name: dem
+    image: quaide/dem
+    volumes:
+      - "{{fx['cfgdir']}}/dem.conf.yml:/app/conf.yml"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart_policy: always
+    state: started
+
+- name: Configure {{role_path|basename}}
+  template:
+    src: "dem.conf.yml"
+    dest: "{{fx['cfgdir']}}/dem.conf.yml"
+    owner: root
+    group: root
+    mode: 0644

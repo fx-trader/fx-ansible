@@ -145,6 +145,13 @@ Code in this repo is functional and tested. To run it, you need to install ansib
 ansible-playbook -i ../development.ini webservers.yml
 ```
 
+# Ansible vault
+
+Make sure to list here all the variables created in ansible vault needed by the playbooks.  One should be able to re-create the vault by using this section of the document and providing appropriate values for each variable.
+
+```
+ansible-vault encrypt_string --vault-id prod@~/fx/cfg/vault_production.pwd --stdin-name 'ops_monitoring.docker_monitor_bot.discord_webhook' > group_vars/all/dem.yml
+```
 
 # License
 MIT License.

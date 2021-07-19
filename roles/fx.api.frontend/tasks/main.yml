@@ -2,8 +2,8 @@
 # tasks file for fx.api.frontend
     - name: Configure nginx
       template:
-        src: nginx/{{ item }}
-        dest: /etc/nginx/{{ item }}
+        src: "nginx/{{ item }}"
+        dest: "/etc/nginx/{{ item }}"
         owner: root
         group: root
         mode: 0644

@@ -1,7 +1,6 @@
 ---
 # tasks file for fx.sniper
-
-- name: Download {{role_path|basename}} docker images
+- name: "Download {{role_path|basename}} docker image"
   docker_image:
     name: "{{ item }}"
     source: pull

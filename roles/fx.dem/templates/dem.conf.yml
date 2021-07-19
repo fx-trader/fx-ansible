@@ -8,7 +8,6 @@ settings:
     - snipers-api
     - snipers-db
     - fxapi-data
-    - oandafeed
     - fxdatafeed
 
 events: ## The Docker event types that you want to trigger alerts for

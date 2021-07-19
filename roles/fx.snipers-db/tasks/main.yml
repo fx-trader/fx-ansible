@@ -12,7 +12,7 @@
     - "{{ snipers['cfgdir'] }}"
     - "{{ snipers['datadir'] }}"
 
-- name: Download {{role_path|basename}} postgresql image
+- name: "Download {{role_path|basename}} postgresql image"
   docker_image:
     name: postgres:13
     source: pull

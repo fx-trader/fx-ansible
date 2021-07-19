@@ -1,2 +1,6 @@
 ---
 # handlers file for fx.dem
+- name: restart dem
+  docker_container:
+    name: dem
+    restart: yes

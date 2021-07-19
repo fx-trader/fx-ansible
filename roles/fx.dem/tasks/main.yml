@@ -1,25 +1,37 @@
 ---
-- name: Download {{role_path|basename}} docker images
+- name: Download Docker Event Monitor docker image
   docker_image:
     name: "{{ item }}"
     source: pull
   with_items:
     - quaide/dem
 
-- name: dem container
+- name: Create Docker Event Monitor config directory
+  file:
+    path:  "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ dem['cfgdir'] }}"
+
+- name: Configure Docker Event Monitor
+  template:
+    src: "dem.conf.yml"
+    dest: "{{dem['cfgdir']}}/dem.conf.yml"
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - restart dem
+
+- name: Setup Docker Event Monitor container
   docker_container:
     name: dem
     image: quaide/dem
     volumes:
-      - "{{fx['cfgdir']}}/dem.conf.yml:/app/conf.yml:ro"
+      - "{{dem['cfgdir']}}/dem.conf.yml:/app/conf.yml:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
     restart_policy: always
     state: started
-
-- name: Configure {{role_path|basename}}
-  template:
-    src: "dem.conf.yml"
-    dest: "{{fx['cfgdir']}}/dem.conf.yml"
-    owner: root
-    group: root
-    mode: 0644

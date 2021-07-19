@@ -1,12 +1,12 @@
 ---
-- name: Download {{role_path|basename}} docker images
+- name: Download portainer docker image
   docker_image:
     name: "{{ item }}"
     source: pull
   with_items:
     - portainer/portainer
 
-- name: portainer container
+- name: Setup portainer container
   docker_container:
     name: portainer
     image: portainer/portainer
@@ -18,10 +18,10 @@
     restart_policy: always
     state: started
 
-- name: Configure nginx
+- name: Configure nginx to proxy to the portainer container
   template:
-    src: nginx/{{ item }}
-    dest: /etc/nginx/{{ item }}
+    src: "nginx/{{ item }}"
+    dest: "/etc/nginx/{{ item }}"
     owner: root
     group: root
     mode: 0644

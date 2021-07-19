@@ -147,6 +147,15 @@ ansible-playbook -i ../development.ini webservers.yml
 
 # Ansible vault
 
+## Decrypting vaults and running the playbooks
+
+```
+ansible-playbook --vault-id prod@~/fx/ansible_vault_pwd.prod -i ~/src/fx-ansible/environments/production fx.yml
+
+```
+
+## Adding new variables to the vault
+
 Make sure to list here all the variables created in ansible vault needed by the playbooks.  One should be able to re-create the vault by using this section of the document and providing appropriate values for each variable.
 
 ```

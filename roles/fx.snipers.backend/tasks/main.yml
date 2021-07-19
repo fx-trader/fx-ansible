@@ -1,5 +1,5 @@
 ---
-- name: Download {{role_path|basename}} docker images
+- name: "Download {{role_path|basename}} docker image"
   docker_image:
     name: "{{ item }}"
     source: pull
@@ -22,8 +22,8 @@
 
 - name: Configure nginx
   template:
-    src: nginx/{{ item }}
-    dest: /etc/nginx/{{ item }}
+    src: "nginx/{{ item }}"
+    dest: "/etc/nginx/{{ item }}"
     owner: root
     group: root
     mode: 0644

@@ -7,11 +7,11 @@
     - { role: fx.api.frontend, tags: [ fx, api, snipers ] }
     - { role: fx.datafeed, tags: [ fx, datafeed ]  }
     - { role: fx.api.backend, tags: [ fx, api ]  }
-    - { role: fx.sniper, tags: [ fx ]  }
+    - { role: fx.sniper, tags: [ fx, snipers ]  }
     - { role: fx.snipers-db, tags: [ fx, snipers ]  }
     - { role: fx.snipers.backend, tags: [ fx, snipers ]  }
-    - { role: fx.portainer, tags: [ fx, monitor ]  }
-    - { role: fx.dem, tags: [ fx, monitor ]  }
+    - { role: fx.portainer, tags: [ fx, monitor, portainer ]  }
+    - { role: fx.dem, tags: [ fx, monitor, dem ]  }
 
   tasks:
     - name: Make sure we have a wheel group

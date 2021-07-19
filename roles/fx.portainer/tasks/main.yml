@@ -4,14 +4,24 @@
     name: "{{ item }}"
     source: pull
   with_items:
-    - portainer/portainer
+    - portainer/portainer-ce
+
+- name: Create portainer data directory for persistent storage
+  file:
+    path:  "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ portainer['datadir'] }}"
 
 - name: Setup portainer container
   docker_container:
     name: portainer
-    image: portainer/portainer
+    image: portainer/portainer-ce
     volumes:
-      - "{{fx['datadir']}}:/data"
+      - "{{portainer['datadir']}}:/data"
       - "/var/run/docker.sock:/var/run/docker.sock"
     published_ports:
       - 9000:9000

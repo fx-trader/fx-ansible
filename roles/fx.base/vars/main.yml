@@ -7,7 +7,6 @@ fx:
   basedir: "{{__fx_base_root_dir}}"
   cfgdir: "{{__fx_base_root_dir}}/cfg"
   datadir: "{{__fx_base_root_dir}}/data"
-  initdir: "{{__fx_base_root_dir}}/init.d"
   datafeed:
     dbhost: fxdatafeed
     dbname: fxdatafeed

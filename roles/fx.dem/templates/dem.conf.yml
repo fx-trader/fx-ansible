@@ -5,6 +5,7 @@ settings:
   inclusions: ## The name of any actors (containers, networks etc) you want to include in alerts
     - smtp
     - portainer
+    - snipers-client
     - snipers-api
     - snipers-db
     - fxapi-data

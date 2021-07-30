@@ -18,4 +18,5 @@
     links:
       - smtp:smtp
     command: "sh -c 'exec /usr/bin/perl /snipers/bin/sniper-client.pl'"
+    restart_policy: always
     state: started

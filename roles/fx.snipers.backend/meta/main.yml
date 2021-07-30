@@ -54,3 +54,4 @@ galaxy_info:
 
 dependencies:
   - fx.base
+  - geerlingguy.nginx

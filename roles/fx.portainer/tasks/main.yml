@@ -24,7 +24,7 @@
       - "{{portainer['datadir']}}:/data"
       - "/var/run/docker.sock:/var/run/docker.sock"
     published_ports:
-      - 9000:9000
+      - 127.0.0.1:9000:9000
     restart_policy: always
     state: started
 

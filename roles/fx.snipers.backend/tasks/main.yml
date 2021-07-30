@@ -13,7 +13,7 @@
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
     published_ports:
-      - 5567:4567
+      - 127.0.0.1:5567:4567
     links:
       - snipers-db:snipers-db
     restart_policy: always

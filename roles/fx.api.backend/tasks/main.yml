@@ -15,7 +15,7 @@
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
     published_ports:
-      - 5000:5000
+      - 127.0.0.1:5000:5000
     links:
       - fxdatafeed:fxdatafeed
     restart_policy: always

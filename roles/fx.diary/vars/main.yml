@@ -1,0 +1,10 @@
+---
+# vars file for fx.diary
+
+diary:
+  cfgdir: "{{fx['cfgdir']}}/diary"
+  datadir: "{{fx['datadir']}}/diary"
+  db:
+    name: fx_diary
+    user: fx_diary
+    pass: fx_diary

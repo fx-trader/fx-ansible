@@ -1,0 +1,68 @@
+---
+# tasks file for fx.diary
+
+- name: Create diary mariadb directories
+  file:
+    path:  "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ diary['cfgdir'] }}"
+    - "{{ diary['datadir'] }}"
+
+- name: "Download {{role_path|basename}} docker images"
+  docker_image:
+    name: "{{ item }}"
+    source: pull
+  with_items:
+    - wordpress
+    - mariadb
+
+- name: diary-database container
+  docker_container:
+    name: diary-database
+    image: mariadb
+    volumes:
+      - "{{diary['datadir']}}:/var/lib/mysql"
+      - "{{diary['cfgdir']}}:/etc/mysql/conf.d:ro"
+    hostname: diary-database
+    restart_policy: always
+    state: started
+    env:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: "{{ diary['db']['name'] }}"
+      MYSQL_USER: "{{ diary['db']['user'] }}"
+      MYSQL_PASSWORD: "{{ diary['db']['pass'] }}"
+
+- name: diary wordpress container
+  docker_container:
+    name: diary-wordpress
+    image: wordpress
+    published_ports:
+      - 127.0.0.1:8167:80
+    links:
+      - diary-database:diary-database
+    restart_policy: always
+    state: started
+    env:
+      WORDPRESS_DB_HOST: "diary-database"
+      WORDPRESS_DB_USER: "{{ diary['db']['user'] }}"
+      WORDPRESS_DB_PASSWORD: "{{ diary['db']['pass'] }}"
+      WORDPRESS_DB_NAME: "{{ diary['db']['name'] }}"
+      WORDPRESS_TABLE_PREFIX: "fx_wp_"
+      WORDPRESS_CONFIG_EXTRA: "define('WP_HOME', 'http://diary.fxhistoricaldata.com');define('WP_SITEURL', 'http://diary.fxhistoricaldata.com');"
+      WORDPRESS_DEBUG: "1"
+
+- name: Configure nginx
+  template:
+    src: "nginx/{{ item }}"
+    dest: "/etc/nginx/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart nginx
+  with_items:
+    - conf.d/diary.conf

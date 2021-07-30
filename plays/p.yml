@@ -1,0 +1,7 @@
+---
+
+- name: Setup fx server
+  hosts: all
+
+  roles:
+    - { role: fx.diary, tags: [ fx, api, snipers ] }

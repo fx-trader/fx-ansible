@@ -12,6 +12,7 @@
     - { role: fx.snipers.backend, tags: [ fx, snipers ]  }
     - { role: fx.portainer, tags: [ fx, monitor, portainer ]  }
     - { role: fx.dem, tags: [ fx, monitor, dem ]  }
+    - { role: fx.diary, tags: [ fx, diary ] }
 
   tasks:
     - name: Make sure we have a wheel group

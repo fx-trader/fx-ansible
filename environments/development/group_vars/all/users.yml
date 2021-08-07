@@ -1,0 +1,9 @@
+---
+users:
+  - username: joao
+    name: Joao Costa
+    groups: ['wheel', 'docker']
+    uid: 1001
+    home: /home/joao
+    ssh_key:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC48DCNmJgZ+aceJROeSwzQUljPDMkRIWvIlsoSccpxkPYtOmPb7MEItgrQLMgsyLGHYFrHcyHOXcZwo5ypEvE3pOCc7X0mSJsOUnCdFoH2SdUm06DCIKng7haCiBEml1myK+DSyGZsKI76wsdeG8kmnWz7G8axOpRJ/qAF81IiRB47FGfMnmWtLKNqWcrMWm48FCVRHsavIVav38XdyuECih2sBSEf5gdTi842gRsCfQHTQgTvvxLCfYOtx2J6eugchwAhYKY4V7SnZ0BvrTJ5VsyHC5MoBc5PzUn04WQKQlDGhVUdkAEOFnm+iUe4EUyl0R6pl7e2zKRHQczdFlNFScGISF/S0AHjh8EyolV0AktHrf2af8yLxPrkFqaT5Akm2Z4jqOhrTG8N/ny+Dx5k8TjM6ler0ZBPOnGl093PE0SlYMdqqQ4POO7i3j3JbsVD1zQxGf9J9reY1qRtgm31uWe85av7ORrtF9UVE1ila78r2BcuEqLOFjfpThlP94FoJ6nQay6yleD4IBrPadgi1+y+Ubt6RkcYB8+fGBnQbeqNECYlDeheuDZ7+l15T4fifNv9vtd+eWSuKPQwr/aO1I3YHjOXkLVSPtbYybMBXjaxrWIVmxvnZ5n/LKTL6FXjqkLk6HSWA7J73TBu/r/tPe4y3rwC/ZiCGq2txK7RAQ== joao@xps-ubuntu"

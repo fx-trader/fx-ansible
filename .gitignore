@@ -1,2 +1,3 @@
 .vpass
 roles/external
+ansible_vault_pwd.*

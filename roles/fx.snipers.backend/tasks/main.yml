@@ -31,3 +31,13 @@
     - restart nginx
   with_items:
     - conf.d/snipers.conf
+
+- name: Set useful shell aliases
+  template:
+    src: "etc/profile.d/{{ item }}"
+    dest: "/etc/profile.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - fx.snipers.backend.sh

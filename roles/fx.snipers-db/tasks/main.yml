@@ -30,6 +30,16 @@
       POSTGRES_PASSWORD: "{{ snipers['db']['pass'] }}"
       POSTGRES_DB: "{{ snipers['db']['name'] }}"
 
+- name: Set useful shell aliases
+  template:
+    src: "etc/profile.d/{{ item }}"
+    dest: "/etc/profile.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - fx.snipers-db.sh
+
 
 # Upgrading postgres major version
 # docker rm -f snipers-db

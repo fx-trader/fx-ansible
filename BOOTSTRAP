@@ -5,7 +5,7 @@ This document describes how to bootstrap the development and production instance
 
 ## OS
 
-CentOS 7
+CentOS 8
 
 ## SELINUX
     sudo yum -y update
@@ -22,7 +22,7 @@ CentOS 7
     pip install docker-py
 
 ## Ansible
-    yum -y install ansible
+    yum -y install epel-repo ansible
     mkdir ~/src && cd ~/src
     git clone git@github.com:fx-trader/fx-ansible.git
     cd ~/src/fx-ansible/plays
@@ -34,6 +34,19 @@ CentOS 7
     cp ~/src/home/.bash_aliases ~  #Edit and change fxdata password
     cp ~/src/home/.gitconfig ~
     cp ~/src/home/.vimrc ~
+
+# Source code repos
+
+    cd ~/src
+    REPOS="fx-trader/Finance-API-Data fx-trader/Finance-HostedTrader fx-trader/Finance-snipers fx-trader/fxhistoricaldata_website_static fx-trader/snipers-api"
+    for repo in $REPOS; do
+        git clone git@github.com:${repo}.git
+    done
+
+# Create token file
+
+    echo $TOKEN > ~/fx/cfg/oanda.token
+
 
 # Database
 

@@ -1,7 +1,8 @@
 oanda:
-  account_id: 001-004-221857-001
+  account_id: 101-004-4210887-001
   rest_endpoint: api-fxpractice.oanda.com
   stream_endpoint: stream-fxpractice.oanda.com
 # for now production is also using the beta endpoints, but at some point i will want to use the real ones below
+#  account_id: 001-004-221857-001
 #  rest_endpoint: api-fxtrade.oanda.com
 #  stream_endpoint: stream-fxtrade.oanda.com

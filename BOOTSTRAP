@@ -35,6 +35,7 @@ CentOS 8
     cp ~/src/home/.bash_aliases ~  #Edit and change fxdata password
     cp ~/src/home/.gitconfig ~
     cp ~/src/home/.vimrc ~
+    cp ~/src/home/.tmux.conf ~
 
 # Source code repos
 
@@ -47,6 +48,7 @@ CentOS 8
 # Create token file
 
     echo $TOKEN > ~/fx/cfg/oanda.token
+    chmod 600 ~/fx/cfg/oanda.token
 
 
 # Database

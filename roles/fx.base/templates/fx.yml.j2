@@ -27,8 +27,8 @@ providers:
         account_id: {{ oanda.account_id }}
         token_file: /etc/fxtrader/oanda.token
         endpoint_hosts:
-            rest: api-fxtrade.oanda.com
-            stream: stream-fxtrade.oanda.com
+            rest: {{ oanda.rest_endpoint }}
+            stream: {{ oanda.stream_endpoint }}
         synthetic:
             NATGAS_SUGAR:
                 op: "/"

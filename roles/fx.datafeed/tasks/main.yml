@@ -59,14 +59,6 @@
     command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
     state: started
 
-- name: fxcm data download cronjob
-  copy:
-    src: cron.d/fxcm_download_data
-    dest: /etc/cron.d/fxcm_download_data
-    owner: root
-    group: root
-    mode: 0644
-
 - name: fxfeed oanda container
   docker_container:
     name: oandafeed
@@ -100,13 +92,14 @@
     command: "fx-cleanup-db.pl --provider=oanda"
     state: present
 
-- name: oanda data download cronjob
+- name: cronjobs
   copy:
-    src: cron.d/oanda_download_data
-    dest: /etc/cron.d/oanda_download_data
+    src: "cron.d/{{ item }}"
+    dest: "/etc/cron.d/{{ item }}"
     owner: root
     group: root
     mode: 0644
+  loop: "{{ datafeed['cronjobs'] }}"
 
 - name: Set useful shell aliases
   lineinfile:

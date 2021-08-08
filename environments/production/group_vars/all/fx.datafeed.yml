@@ -1,0 +1,4 @@
+datafeed:
+  cronjobs:
+    - fxcm_download_data
+    - oanda_download_data

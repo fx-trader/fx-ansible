@@ -8,9 +8,10 @@ This document describes how to bootstrap the development and production instance
 CentOS 8
 
 ## SELINUX
-    sudo yum -y update
-    sudo sed -i '/^SELINUX=/c\SELINUX=disabled' /etc/selinux/config
-    sudo init 6
+    firewall-cmd --permanent --add-port=80/tcp
+    yum -y update
+    sed -i '/^SELINUX=/c\SELINUX=disabled' /etc/selinux/config
+    init 6
 
 ## Useful things to have
     yum -y install bind-utils net-tools tmux strace
@@ -19,16 +20,21 @@ CentOS 8
     yum -y install git
     ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-## Python ansible dependencies
-    yum -y install python3-docker
-
 ## Ansible
-    yum -y install epel-repo ansible
+    yum -y install epel-release
+    yum module reset nginx
+    yum module enable nginx:1.20
+    yum -y install ansible python3-docker
+    chmod +r /root # This is necessary in development only so that nginx can read and serve the files from /root/src/fxhistoricaldata_website_static.  The prod version is served via github pages.
     mkdir ~/src && cd ~/src
-    git clone git@github.com:fx-trader/fx-ansible.git
+    #git clone git@github.com:fx-trader/fx-ansible.git
+    git clone https://github.com/fx-trader/fx-ansible.git
+    cd ~/src/fx-ansible/extensions/setup
+    ./role_update.sh
+    cd ~/src/fx-ansible
+    echo $VAULT_PASS > .vpass
     cd ~/src/fx-ansible/plays
-    ansible-galaxy install -r ../roles/roles_requirements.yml
-    ansible-playbook -i ../production.ini fx.yml
+    ansible-playbook -i ../environments/development fx.yml
 
 # Get some personal config files
     git clone https://github.com/joaocosta/home.git ~/src/home
@@ -40,7 +46,7 @@ CentOS 8
 # Source code repos
 
     cd ~/src
-    REPOS="fx-trader/Finance-API-Data fx-trader/Finance-HostedTrader fx-trader/Finance-snipers fx-trader/fxhistoricaldata_website_static fx-trader/snipers-api"
+    REPOS="fx-trader/Finance-API-Data fx-trader/Finance-HostedTrader fx-trader/Finance-snipers fx-trader/fxhistoricaldata_website_static fx-trader/snipers-api mysqludf/lib_mysqludf_ta"
     for repo in $REPOS; do
         git clone git@github.com:${repo}.git
     done
@@ -60,16 +66,13 @@ The database instance runs inside a docker container. It includes a mysql udf bi
     /usr/local/bin/fx-download.pl --timeframes=60 --numItems=150000 --verbose
     exit
 
-# Get fx-snipers repo
-    mkdir src
-    cd src
-    git clone git@github.com:fx-trader/Finance-snipers.git
 
-    cat<<EOF>/root/fxcm.real
-    export FXCM_USERNAME=89005525
-    export FXCM_PASSWORD=XXXXX
-    export FXCM_ACCOUNT_TYPE=Real
-    EOF
+
+# Snipers
+
+## Create database schema
+
+    docker run --rm --link snipers-db:snipers-db fxtrader/snipers-api ruby /webapp/db/schema.rb
 
 # Get fxhistoricaldata static website
     cd ~/src

@@ -1,5 +1,15 @@
 ---
 # tasks file for fx.base
+- name: Install packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - bind-utils
+    - net-tools
+    - tmux
+    - strace
+
 - name: Create fx directories
   file:
     path:  "{{ item }}"

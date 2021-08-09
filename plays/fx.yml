@@ -10,6 +10,7 @@
     - { role: fx.sniper, tags: [ fx, snipers ]  }
     - { role: fx.snipers-db, tags: [ fx, snipers ]  }
     - { role: fx.snipers.backend, tags: [ fx, snipers ]  }
+    - { role: fx.ui, tags: [ fx, ui ]  }
     - { role: fx.portainer, tags: [ fx, monitor, portainer ]  }
     - { role: fx.dem, tags: [ fx, monitor, dem ]  }
     - { role: fx.diary, tags: [ fx, diary ] }

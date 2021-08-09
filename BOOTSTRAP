@@ -25,7 +25,7 @@ CentOS 8
     yum module reset nginx
     yum module enable nginx:1.20
     yum -y install ansible python3-docker
-    chmod +r /root # This is necessary in development only so that nginx can read and serve the files from /root/src/fxhistoricaldata_website_static.  The prod version is served via github pages.
+    chmod o+rx /root # This is necessary in development only so that nginx can read and serve the files from /root/src/fxhistoricaldata_website_static.  The prod version is served via github pages.
     mkdir ~/src && cd ~/src
     #git clone git@github.com:fx-trader/fx-ansible.git
     git clone https://github.com/fx-trader/fx-ansible.git

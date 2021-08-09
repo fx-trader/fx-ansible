@@ -1,6 +1,6 @@
 ---
 nginx:
-  hostname: api.fxhistoricaldata.com
+  hostname: signals.fxdev00
   port: 80
   proxy_pass:
     - location: "/"

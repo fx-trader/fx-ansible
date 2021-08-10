@@ -13,9 +13,6 @@ CentOS 8
     sed -i '/^SELINUX=/c\SELINUX=disabled' /etc/selinux/config
     init 6
 
-## Useful things to have
-    yum -y install bind-utils net-tools tmux strace
-
 ## git
     yum -y install git
     ssh-keyscan github.com >> ~/.ssh/known_hosts
@@ -37,7 +34,7 @@ CentOS 8
     ansible-playbook -i ../environments/development fx.yml
 
 # Get some personal config files
-    git clone https://github.com/joaocosta/home.git ~/src/home
+    git clone git@github.com:joaocosta/home.git ~/src/home
     cp ~/src/home/.bash_aliases ~  #Edit and change fxdata password
     cp ~/src/home/.gitconfig ~
     cp ~/src/home/.vimrc ~
@@ -50,12 +47,6 @@ CentOS 8
     for repo in $REPOS; do
         git clone git@github.com:${repo}.git
     done
-
-# Create token file
-
-    echo $TOKEN > ~/fx/cfg/oanda.token
-    chmod 600 ~/fx/cfg/oanda.token
-
 
 # Database
 

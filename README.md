@@ -150,7 +150,7 @@ ansible-playbook -i ../development.ini webservers.yml
 ## Decrypting vaults and running the playbooks
 
 ```
-ansible-playbook --vault-id production@~/src/fx-ansible/ansible_vault_pwd.production -i ~/src/fx-ansible/environments/production fx.yml
+ansible-playbook -i ~/src/fx-ansible/environments/production fx.yml
 
 ```
 
@@ -159,7 +159,8 @@ ansible-playbook --vault-id production@~/src/fx-ansible/ansible_vault_pwd.produc
 Make sure to list here all the variables created in ansible vault needed by the playbooks.  One should be able to re-create the vault by using this section of the document and providing appropriate values for each variable.
 
 ```
-ansible-vault encrypt_string --vault-id production@~/src/fx-ansible/ansible_vault_pwd.production --stdin-name 'ops_monitoring.docker_monitor_bot.discord_webhook' > group_vars/all/dem.yml
+ansible-vault encrypt_string --stdin-name 'ops_monitoring.docker_monitor_bot.discord_webhook' >> group_vars/all/dem.yml
+ansible-vault encrypt_string --stdin-name 'oanda.token' >> group_vars/all/fx.base.yml
 ```
 
 # License

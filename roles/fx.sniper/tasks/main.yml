@@ -5,18 +5,17 @@
     name: "{{ item }}"
     source: pull
   with_items:
-    - fxtrader/finance-hostedtrader
+    - fxtrader/snipers-client
 #    - redis
 
 - name: snipers client
   docker_container:
     name: snipers-client
-    image: fxtrader/finance-hostedtrader
+    image: fxtrader/snipers-client
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
-      - "{{fx['srcdir']}}/Finance-snipers:/snipers:ro"
     links:
       - smtp:smtp
-    command: "sh -c 'exec /usr/bin/perl /snipers/bin/sniper-client.pl'"
+      - snipers-api:snipers-api
     restart_policy: always
     state: started

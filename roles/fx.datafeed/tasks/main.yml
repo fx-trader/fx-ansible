@@ -37,6 +37,7 @@
       - "{{datafeed['cfgdir']}}:/etc/mysql/conf.d:ro"
     hostname: data
     state: started
+    restart_policy: always
     env:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: "{{ datafeed['db']['name'] }}"
@@ -57,7 +58,7 @@
     links:
       - fxdatafeed:fxdatafeed
     command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
-    state: started
+    state: present
 
 - name: fxfeed oanda container
   docker_container:

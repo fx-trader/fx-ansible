@@ -25,7 +25,7 @@ providers:
         accountType: Demo
     oanda: &oandabase
         account_id: {{ oanda.account_id }}
-        token_file: /etc/fxtrader/oanda.token
+        token: {{ oanda.token }}
         endpoint_hosts:
             rest: {{ oanda.rest_endpoint }}
             stream: {{ oanda.stream_endpoint }}

@@ -19,10 +19,6 @@ db:
     dbpasswd: {{ fx['datafeed']['dbpass'] }}
 defaultProvider: oanda
 providers:
-    fxcm:
-        username: D25695585
-        password: 945
-        accountType: Demo
     oanda: &oandabase
         account_id: {{ oanda.account_id }}
         token: {{ oanda.token }}

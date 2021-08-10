@@ -112,6 +112,6 @@
     insertafter: EOF
     create: true
   loop:
-    - { regexp: "alias fx-shell=",  line: "alias fx-shell='touch $HOME/fx-shell.bash_history;docker run -ti --env http_proxy --env https_proxy --rm --link fxdatafeed:fxdatafeed --link smtp:smtp -v $HOME/fx/cfg:/etc/fxtrader -v $HOME/fx-shell.bash_history:/root/.bash_history -v ~/src:/src -h fx-shell fxtrader/finance-hostedtrader bash'"}
+    - { regexp: "alias fx-shell=",  line: "alias fx-shell='touch $HOME/fx-shell.bash_history;docker run -ti --env http_proxy --env https_proxy --rm --link fxdatafeed:fxdatafeed --link smtp:smtp -v {{ fx['cfgdir'] }}:/etc/fxtrader -v $HOME/fx-shell.bash_history:$HOME/.bash_history -v ~/src:/src -h fx-shell fxtrader/finance-hostedtrader bash'"}
     - { regexp: "alias fx-db=",  line: "alias fx-db='docker run -it --rm --link fxdatafeed:mysql mariadb sh -c '\\''exec mysql -A -h\"$MYSQL_PORT_3306_TCP_ADDR\" -P\"$MYSQL_PORT_3306_TCP_PORT\" -u{{datafeed['db']['user']}} -p{{datafeed['db']['pass']}} {{datafeed['db']['name']}}'\\'''"}
     - { regexp: "alias fx-db-root=",  line: "alias fx-db-root='docker run -it --rm --link fxdatafeed:mysql mariadb sh -c '\\''exec mysql -A -h\"$MYSQL_PORT_3306_TCP_ADDR\" -P\"$MYSQL_PORT_3306_TCP_PORT\" -uroot -p\"$MYSQL_ROOT_PASSWORD\" {{datafeed['db']['name']}}'\\'''"}

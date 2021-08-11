@@ -37,3 +37,9 @@
     owner: root
     group: root
     mode: 0644
+
+- name: permit traffic in default zone for http service
+  ansible.posix.firewalld:
+    service: http
+    permanent: yes
+    state: enabled

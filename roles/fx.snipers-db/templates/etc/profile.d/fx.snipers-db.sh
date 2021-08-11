@@ -1,1 +1,1 @@
-alias fx-snipers-db='docker run -ti --rm --link snipers-db:snipers-db postgres psql -h{{ snipers['db']['hostname']}} {{ snipers['db']['name'] }} {{ snipers['db']['user'] }}'
+alias fx-snipers-db='docker run -ti --rm --network {{fx.docker.network.name}} postgres psql -h{{ snipers['db']['hostname']}} {{ snipers['db']['name'] }} {{ snipers['db']['user'] }}'

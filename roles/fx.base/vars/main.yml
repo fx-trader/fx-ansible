@@ -8,6 +8,9 @@ fx:
   cfgdir: "{{__fx_base_root_dir}}/cfg"
   datadir: "{{__fx_base_root_dir}}/data"
   srcdir: "{{__fx_base_root_dir}}/src"
+  docker:
+    network:
+      name: fx-docker
   datafeed:
     dbhost: fxdatafeed
     dbname: fxdatafeed

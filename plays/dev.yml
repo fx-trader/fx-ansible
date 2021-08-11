@@ -32,8 +32,9 @@
         image: fxtrader/finance-hostedtrader
         volumes:
           - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
-        links:
-          - fxdatafeed:fxdatafeed
+        networks:
+          - name: "{{ fx.docker.network.name }}"
+        purge_networks: yes
         command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
         auto_remove: yes
         state: started
@@ -42,8 +43,9 @@
       docker_container:
         name: create_snipersdb_schema
         image: fxtrader/snipers-api
-        links:
-          - snipers-db:snipers-db
+        networks:
+          - name: "{{ fx.docker.network.name }}"
+        purge_networks: yes
         command: "ruby /webapp/db/schema.rb"
         auto_remove: yes
         state: started

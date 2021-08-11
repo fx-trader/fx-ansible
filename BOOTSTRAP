@@ -54,7 +54,7 @@ The database instance runs inside a docker container. It includes a mysql udf bi
 
 ## Generate schema
 
-    docker run --rm -v /root/fx/cfg:/etc/fxtrader --link fxdatafeed:fxdatafeed fxtrader/finance-hostedtrader bash -c "fx-create-db-schema.pl | fx-db-client.pl"
+    docker run --rm -v /root/fx/cfg:/etc/fxtrader --network fx-docker fxtrader/finance-hostedtrader bash -c "fx-create-db-schema.pl | fx-db-client.pl"
 
 ## Populate data
     fx-shell
@@ -67,7 +67,7 @@ The database instance runs inside a docker container. It includes a mysql udf bi
 
 ## Create database schema
 
-    docker run --rm --link snipers-db:snipers-db fxtrader/snipers-api ruby /webapp/db/schema.rb
+    docker run --rm --network fx-docker fxtrader/snipers-api ruby /webapp/db/schema.rb
 
 # Get fxhistoricaldata static website
     cd ~/src
@@ -77,12 +77,6 @@ The database instance runs inside a docker container. It includes a mysql udf bi
 ---
 
 # HOWTO
-
-## MySql client shell
-    docker run  -it --rm \
-                --link fxdata:mysql \
-                mariadb \
-                sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
 
 ## Dev container
 make sure mydevapi.fxhistoricaldata.com is mapped to the VM in /etc/hosts
@@ -96,7 +90,7 @@ docker run  --rm \
             -e PERL5LIB=/src/Finance-HostedTrader/lib \
             -e PATH=/src/Finance-HostedTrader/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/root/bin \
             -p 5002:5000 \
-            --link fxdata:fxdata \
+            --network fx-docker \
             fxtrader/finance-api-data \
             bash # Then run plackup /src/Finance-API-Data/bin/app.psgi
 

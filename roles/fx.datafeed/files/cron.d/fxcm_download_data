@@ -1,6 +1,6 @@
 #
-* 21-23 * * 0 root docker run -t --rm --link fxdatafeed:fxdatafeed -v $HOME/fx/cfg:/etc/fxtrader fxtrader/finance-hostedtrader fx-demo-oanda.pl >> /root/account.stats
-* * * * 1-4 root docker run -t --rm --link fxdatafeed:fxdatafeed -v $HOME/fx/cfg:/etc/fxtrader fxtrader/finance-hostedtrader fx-demo-oanda.pl >> /root/account.stats
-* 0-21 * * 5 root docker run -t --rm --link fxdatafeed:fxdatafeed -v $HOME/fx/cfg:/etc/fxtrader fxtrader/finance-hostedtrader fx-demo-oanda.pl >> /root/account.stats
+* 21-23 * * 0 root docker run -t --rm --network fx-docker -v $HOME/fx/cfg:/etc/fxtrader fxtrader/finance-hostedtrader fx-demo-oanda.pl >> /root/account.stats
+* * * * 1-4 root docker run -t --rm --network fx-docker -v $HOME/fx/cfg:/etc/fxtrader fxtrader/finance-hostedtrader fx-demo-oanda.pl >> /root/account.stats
+* 0-21 * * 5 root docker run -t --rm --network fx-docker -v $HOME/fx/cfg:/etc/fxtrader fxtrader/finance-hostedtrader fx-demo-oanda.pl >> /root/account.stats
 
-1 20 * * 0-5 root sleep 6 && docker run -t --rm --link fxdatafeed:fxdatafeed --link smtp:smtp -v $HOME/fx/cfg:/etc/fxtrader fxtrader/finance-hostedtrader bash -c 'fx-demo-oanda.pl 1 | fx-email.pl --subject "Daily stat"'
+1 20 * * 0-5 root sleep 6 && docker run -t --rm --network fx-docker -v $HOME/fx/cfg:/etc/fxtrader fxtrader/finance-hostedtrader bash -c 'fx-demo-oanda.pl 1 | fx-email.pl --subject "Daily stat"'

@@ -23,7 +23,10 @@
     image: postgres:13
     volumes:
       - "{{snipers['datadir']}}:/var/lib/postgresql/data"
-    hostname: "{{ snipers['db']['hostname'] }}"
+#    hostname: "{{ snipers['db']['hostname'] }}"
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
     state: started
     restart_policy: always
     env:

@@ -14,8 +14,8 @@
     image: fxtrader/snipers-client
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
-    links:
-      - smtp:smtp
-      - snipers-api:snipers-api
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
     restart_policy: always
     state: started

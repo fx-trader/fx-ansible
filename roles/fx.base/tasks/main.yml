@@ -43,3 +43,9 @@
     service: http
     permanent: yes
     state: enabled
+
+- name: fx network
+  docker_network:
+    name: "{{ fx.docker.network.name }}"
+    driver: bridge
+  

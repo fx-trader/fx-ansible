@@ -16,8 +16,9 @@
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
     published_ports:
       - 127.0.0.1:5000:5000
-    links:
-      - fxdatafeed:fxdatafeed
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
     restart_policy: always
     state: started
     command: "starman --workers 2 /webapp/bin/app.psgi"

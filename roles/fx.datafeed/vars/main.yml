@@ -8,3 +8,4 @@ datafeed:
     name: fxdatafeed
     user: fxdatafeed
     pass: fxdatafeed
+    host: fxdatafeed

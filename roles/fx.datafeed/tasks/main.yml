@@ -35,7 +35,9 @@
     volumes:
       - "{{datafeed['datadir']}}:/var/lib/mysql"
       - "{{datafeed['cfgdir']}}:/etc/mysql/conf.d:ro"
-    hostname: data
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
     state: started
     restart_policy: always
     env:
@@ -55,8 +57,9 @@
     image: fxtrader/finance-hostedtrader
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
-    links:
-      - fxdatafeed:fxdatafeed
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
     command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
     state: present
 
@@ -66,8 +69,9 @@
     image: fxtrader/finance-hostedtrader
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
-    links:
-      - fxdatafeed:fxdatafeed
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
     command: "fx-download.pl --verbose --timeframes=60 --numItems=15 --provider=oanda"
     state: present
 
@@ -112,6 +116,6 @@
     insertafter: EOF
     create: true
   loop:
-    - { regexp: "alias fx-shell=",  line: "alias fx-shell='touch $HOME/fx-shell.bash_history;docker run -ti --env http_proxy --env https_proxy --rm --link fxdatafeed:fxdatafeed --link snipers-api:snipers-api --link smtp:smtp -v {{ fx['cfgdir'] }}:/etc/fxtrader -v $HOME/fx-shell.bash_history:$HOME/.bash_history -v ~/src:/src -h fx-shell fxtrader/finance-hostedtrader bash'"}
-    - { regexp: "alias fx-db=",  line: "alias fx-db='docker run -it --rm --link fxdatafeed:mysql mariadb sh -c '\\''exec mysql -A -h\"$MYSQL_PORT_3306_TCP_ADDR\" -P\"$MYSQL_PORT_3306_TCP_PORT\" -u{{datafeed['db']['user']}} -p{{datafeed['db']['pass']}} {{datafeed['db']['name']}}'\\'''"}
-    - { regexp: "alias fx-db-root=",  line: "alias fx-db-root='docker run -it --rm --link fxdatafeed:mysql mariadb sh -c '\\''exec mysql -A -h\"$MYSQL_PORT_3306_TCP_ADDR\" -P\"$MYSQL_PORT_3306_TCP_PORT\" -uroot -p\"$MYSQL_ROOT_PASSWORD\" {{datafeed['db']['name']}}'\\'''"}
+    - { regexp: "alias fx-shell=",  line: "alias fx-shell='touch $HOME/fx-shell.bash_history;docker run -ti --env http_proxy --env https_proxy --rm --network {{ fx.docker.network.name }} -v {{ fx['cfgdir'] }}:/etc/fxtrader -v $HOME/fx-shell.bash_history:$HOME/.bash_history -v ~/src:/src -h fx-shell fxtrader/finance-hostedtrader bash'"}
+    - { regexp: "alias fx-db=",  line: "alias fx-db='docker run -it --rm --network {{ fx.docker.network.name }} mariadb sh -c '\\''exec mysql -A -h{{datafeed['db']['host']}} -P3306 -u{{datafeed['db']['user']}} -p{{datafeed['db']['pass']}} {{datafeed['db']['name']}}'\\'''"}
+    - { regexp: "alias fx-db-root=",  line: "alias fx-db-root='docker run -it --rm --network {{ fx.docker.network.name }} mariadb sh -c '\\''exec mysql -A -h{{datafeed['db']['host']}} -P3306 -uroot -p\"$MYSQL_ROOT_PASSWORD\" {{datafeed['db']['name']}}'\\'''"}

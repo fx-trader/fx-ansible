@@ -10,12 +10,13 @@
   docker_container:
     name: snipers-api
     image: fxtrader/snipers-api
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
     published_ports:
       - 127.0.0.1:5567:4567
-    links:
-      - snipers-db:snipers-db
     restart_policy: always
     state: started
     command: "ruby /webapp/app.rb -o 0.0.0.0"

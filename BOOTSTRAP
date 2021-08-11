@@ -52,6 +52,10 @@ CentOS 8
 
 The database instance runs inside a docker container. It includes a mysql udf binary optimised to run finance calculations (https://github.com/jo#
 
+## Generate schema
+
+    docker run --rm -v /root/fx/cfg:/etc/fxtrader --link fxdatafeed:fxdatafeed fxtrader/finance-hostedtrader bash -c "fx-create-db-schema.pl | fx-db-client.pl"
+
 ## Populate data
     fx-shell
     /usr/local/bin/fx-download.pl --timeframes=60 --numItems=150000 --verbose

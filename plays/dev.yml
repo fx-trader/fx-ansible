@@ -1,0 +1,51 @@
+---
+
+- name: Setup dev env
+  hosts: localhost
+
+  vars:
+    dotfiles_repo: "git@github.com:joaocosta/home.git"
+    dotfiles_repo_local_destination: "~/src/home"
+    dotfiles_files:
+      - .vimrc
+      - .gitconfig
+      - .tmux.conf
+
+  tasks:
+    - name: Git checkout
+      ansible.builtin.git:
+        repo: "git@github.com:{{item}}.git"
+        dest: "{{ ansible_env.HOME }}/src/fx/{{ item.split('/')[1] }}"
+      loop:
+        - fx-trader/Finance-API-Data
+        - fx-trader/Finance-HostedTrader
+        - fx-trader/Finance-snipers
+        - fx-trader/fxhistoricaldata_website_static
+        - fx-trader/snipers-api
+        - mysqludf/lib_mysqludf_ta
+
+    - name: Create fxdatafeed schema
+      docker_container:
+        name: create_fx_datafeed_schema
+        image: fxtrader/finance-hostedtrader
+        volumes:
+          - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
+        links:
+          - fxdatafeed:fxdatafeed
+        command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
+        auto_remove: yes
+        state: started
+
+    - name: Create snipers-db schema
+      docker_container:
+        name: create_snipersdb_schema
+        image: fxtrader/snipers-api
+        links:
+          - snipers-db:snipers-db
+        command: "ruby /webapp/db/schema.rb"
+        auto_remove: yes
+        state: started
+
+
+  roles:
+    - { role: geerlingguy.dotfiles }

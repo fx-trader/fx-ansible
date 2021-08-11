@@ -4,6 +4,8 @@
   hosts: localhost
 
   vars:
+    fx:
+      cfgdir: /root/fx/cfg
     dotfiles_repo: "git@github.com:joaocosta/home.git"
     dotfiles_repo_local_destination: "~/src/home"
     dotfiles_files:

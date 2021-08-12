@@ -26,6 +26,13 @@
         - fx-trader/snipers-api
         - mysqludf/lib_mysqludf_ta
 
+    - name: Install dev packages
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - make
+
     - name: Create fxdatafeed schema
       docker_container:
         name: create_fx_datafeed_schema

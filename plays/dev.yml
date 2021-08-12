@@ -45,31 +45,7 @@
       loop:
         - { regexp: "alias docker-build=",  line: "alias docker-build='docker build -t $(cat .dockertag):latest .'"}
         - { regexp: "alias docker-push=",  line: "alias docker-push='docker push $(cat .dockertag)'"}
-
-    - name: Create fxdatafeed schema
-      docker_container:
-        name: create_fx_datafeed_schema
-        image: fxtrader/finance-hostedtrader
-        volumes:
-          - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
-        networks:
-          - name: "{{ fx.docker.network.name }}"
-        purge_networks: yes
-        command: "/bin/bash -c 'fx-create-db-schema.pl | fx-db-client.pl'"
-        auto_remove: yes
-        state: started
-
-    - name: Create snipers-db schema
-      docker_container:
-        name: create_snipersdb_schema
-        image: fxtrader/snipers-api
-        networks:
-          - name: "{{ fx.docker.network.name }}"
-        purge_networks: yes
-        command: "ruby /webapp/db/schema.rb"
-        auto_remove: yes
-        state: started
-
+        - { regexp: "export PATH=",  line: "export PATH=$PATH:~/src/home/bin"}
 
   roles:
     - { role: geerlingguy.dotfiles }

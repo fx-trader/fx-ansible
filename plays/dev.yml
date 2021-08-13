@@ -24,6 +24,8 @@
         - fx-trader/Finance-snipers
         - fx-trader/fxhistoricaldata_website_static
         - fx-trader/snipers-api
+        - fx-trader/fx-web
+        - fx-trader/fx-ansible
         - mysqludf/lib_mysqludf_ta
 
     - name: Install dev packages

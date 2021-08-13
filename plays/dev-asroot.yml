@@ -1,0 +1,19 @@
+---
+
+- name: Setup dev env (root tasks)
+  hosts: localhost
+
+  tasks:
+    - name: Set useful shell aliases
+      lineinfile:
+        dest: /etc/profile.d/fx-dev.sh
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        owner: root
+        state: present
+        insertafter: EOF
+        create: true
+      loop:
+        - { regexp: "alias docker-build=",  line: "alias docker-build='docker build -t $(cat .dockertag):latest .'"}
+        - { regexp: "alias docker-push=",  line: "alias docker-push='docker push $(cat .dockertag)'"}
+        - { regexp: "export PATH=",  line: "export PATH=$PATH:~/src/home/bin"}

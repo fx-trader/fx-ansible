@@ -28,13 +28,6 @@
         - fx-trader/fx-ansible
         - mysqludf/lib_mysqludf_ta
 
-    - name: Install dev packages
-      ansible.builtin.package:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - make
-
     - name: Set useful shell aliases
       lineinfile:
         dest: /etc/profile.d/fx-dev.sh

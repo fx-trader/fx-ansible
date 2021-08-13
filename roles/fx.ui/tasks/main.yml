@@ -1,4 +1,21 @@
 ---
+
+- name: "Download {{role_path|basename}} docker images"
+  docker_image:
+    name: "{{ item }}"
+    source: pull
+  with_items:
+    - fxtrader/web
+
+- name: nginx container
+  docker_container:
+    name: fx-web
+    image: fxtrader/web
+    published_ports:
+      - 127.0.0.1:8080:80
+    restart_policy: always
+    state: started
+
 - name: Configure nginx
   template:
     src: "nginx/{{ item }}"

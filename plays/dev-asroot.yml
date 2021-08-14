@@ -16,4 +16,5 @@
       loop:
         - { regexp: "alias docker-build=",  line: "alias docker-build='docker build -t $(cat .dockertag):latest .'"}
         - { regexp: "alias docker-push=",  line: "alias docker-push='docker push $(cat .dockertag)'"}
+        - { regexp: "function docker-update-container {",  line: "function docker-update-container { RUN=$(docker run -v /var/run/docker.sock:/var/run/docker.sock:ro assaflavie/runlike -p $1) && docker rm -f $1 && sh -c \"$RUN\"; }"}
         - { regexp: "export PATH=",  line: "export PATH=$PATH:~/src/home/bin"}

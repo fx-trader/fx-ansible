@@ -15,6 +15,7 @@
       - 127.0.0.1:8080:80
     restart_policy: always
     state: started
+    volumes: "{{ fx.ui.fx_web.volumes }}"
 
 - name: Configure nginx
   template:

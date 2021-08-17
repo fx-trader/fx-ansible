@@ -3,4 +3,4 @@ fx:
   ui:
     fx_web:
       volumes:
-        - "{{ fx_srcdir | default('') }}/fx/fx-web/html:/usr/share/nginx/html:ro"
+        - "{{ fx_srcdir | default('') }}/fx-web/html:/usr/share/nginx/html:ro"

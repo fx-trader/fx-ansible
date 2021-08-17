@@ -10,6 +10,7 @@
     - net-tools
     - tmux
     - strace
+    - vim-enhanced
 
 - name: Create fx directories
   file:

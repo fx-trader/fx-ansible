@@ -163,5 +163,14 @@ ansible-vault encrypt_string --stdin-name 'ops_monitoring.docker_monitor_bot.dis
 ansible-vault encrypt_string --stdin-name 'oanda.token' >> group_vars/all/fx.base.yml
 ```
 
+## Customising source location for dev environments
+
+Some roles support extra bind mount volumes so that files are served from the source directory in the host rather than within the container itself.  To enable this, you need to tell ansible where your source directory tree is, ie:
+
+```
+ansible-playbook -i ../environments/development --extra-vars "fx_srcdir=/home/joao/src/fx"
+
+```
+
 # License
 MIT License.

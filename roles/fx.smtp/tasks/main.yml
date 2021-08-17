@@ -13,7 +13,7 @@
     image: mwader/postfix-relay
     networks:
       - name: "{{ fx.docker.network.name }}"
-    purge_networks: yes
+    purge_networks: no
     env:
       POSTFIX_myhostname: smtp.fxhistoricaldata.com
     restart_policy: always

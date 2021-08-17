@@ -81,8 +81,9 @@
     image: fxtrader/finance-hostedtrader
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
-    links:
-      - fxdatafeed:fxdatafeed
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
     command: "fx-download.pl --verbose --timeframes=60 --numItems=2880 --provider=oanda_historical"
     state: present
 
@@ -92,8 +93,9 @@
     image: fxtrader/finance-hostedtrader
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
-    links:
-      - fxdatafeed:fxdatafeed
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
     command: "fx-cleanup-db.pl --provider=oanda"
     state: present
 

@@ -5,6 +5,7 @@
     name: "{{ item }}"
     state: present
   loop:
+    - bash-completion
     - bind-utils
     - net-tools
     - tmux

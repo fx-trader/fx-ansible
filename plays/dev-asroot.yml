@@ -17,5 +17,6 @@
         - { regexp: "alias docker-build=",  line: "alias docker-build='docker build -t $(cat .dockertag):latest .'"}
         - { regexp: "alias docker-push=",  line: "alias docker-push='docker push $(cat .dockertag)'"}
 #        - { regexp: "alias docker-images-pull-all=",  line: "alias docker-images-pull-all='for i in $(docker images --filter dangling=false --format \"{{.Repository}}\"); do printf \"\\n\\u001b[34mPulling ${i}\\033[0m\\n" && docker pull $i; done'"}
-        - { regexp: "function docker-update-container {",  line: "function docker-update-container { RUN=$(docker run -v /var/run/docker.sock:/var/run/docker.sock:ro assaflavie/runlike -p $1) && docker rm -f $1 && sh -c \"$RUN\"; }"}
+        - { regexp: "function docker-update-container-runlike {",  line: "function docker-update-container { RUN=$(docker run -v /var/run/docker.sock:/var/run/docker.sock:ro assaflavie/runlike -p $1) && docker rm -f $1 && sh -c \"$RUN\"; }"}
+        - { regexp: "function docker-update-container-template {",  line: 'function docker-update-container { RUN=$(docker inspect -f "(<~/src/home/docker/run.tpl)" $1) && docker rm -f $1 && sh -c "$RUN"; }'}
         - { regexp: "export PATH=",  line: "export PATH=$PATH:~/src/home/bin"}

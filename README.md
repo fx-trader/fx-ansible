@@ -169,7 +169,6 @@ Some roles support extra bind mount volumes so that files are served from the so
 
 ```
 ansible-playbook -i ../environments/development --extra-vars "fx_srcdir=/home/joao/src/fx" fx.yml
-
 ```
 
 # License

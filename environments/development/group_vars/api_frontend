@@ -1,6 +1,6 @@
 ---
 nginx:
-  hostname: signals.fxdev00
+  hostname: api.fxdev00
   port: 80
   proxy_pass:
     - location: "/"

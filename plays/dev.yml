@@ -19,6 +19,7 @@
         repo: "git@github.com:{{item}}.git"
         dest: "{{ ansible_env.HOME }}/src/fx/{{ item.split('/')[1] }}"
       loop:
+        - fx-trader/architecture
         - fx-trader/Finance-API-Data
         - fx-trader/Finance-HostedTrader
         - fx-trader/Finance-snipers

@@ -52,7 +52,7 @@
       WORDPRESS_DB_PASSWORD: "{{ diary['db']['pass'] }}"
       WORDPRESS_DB_NAME: "{{ diary['db']['name'] }}"
       WORDPRESS_TABLE_PREFIX: "fx_wp_"
-      WORDPRESS_CONFIG_EXTRA: "define('WP_HOME', 'http://diary.fxhistoricaldata.com');define('WP_SITEURL', 'http://diary.fxhistoricaldata.com');"
+      WORDPRESS_CONFIG_EXTRA: "define('WP_HOME', 'http://{{ diary.server_name }}');define('WP_SITEURL', 'http://{{ diary.server_name }}');"
       WORDPRESS_DEBUG: "1"
 
 - name: Configure nginx

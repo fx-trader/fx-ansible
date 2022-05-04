@@ -1,2 +1,2 @@
 dependencies:
-  - geerlingguy.nginx
+  - fx.nginx.proxy

@@ -159,8 +159,8 @@ ansible-playbook -i ~/src/fx-ansible/environments/production fx.yml
 Make sure to list here all the variables created in ansible vault needed by the playbooks.  One should be able to re-create the vault by using this section of the document and providing appropriate values for each variable.
 
 ```
-ansible-vault encrypt_string --stdin-name 'ops_monitoring.docker_monitor_bot.discord_webhook' >> group_vars/all/dem.yml
-ansible-vault encrypt_string --stdin-name 'oanda.token' >> group_vars/all/fx.base.yml
+ansible-vault encrypt_string --stdin-name 'ops_monitoring.docker_monitor_bot.discord_webhook' --vault-password-file .vpass >> group_vars/all/dem.yml
+ansible-vault encrypt_string --stdin-name 'oanda.token' --vault-password-file .vpass >> group_vars/all/fx.base.yml
 ```
 
 ## Customising source location for dev environments

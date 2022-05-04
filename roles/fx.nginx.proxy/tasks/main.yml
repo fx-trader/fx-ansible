@@ -1,5 +1,5 @@
 ---
-# tasks file for fx.api.frontend
+# tasks file for fx.nginx.proxy
     - name: Configure nginx
       template:
         src: "nginx/{{ item }}"
@@ -10,4 +10,5 @@
       notify:
         - restart nginx
       with_items:
-        - conf.d/api.conf
+        - nginx.conf
+        - conf.d/default.conf

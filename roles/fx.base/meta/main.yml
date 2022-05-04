@@ -53,6 +53,5 @@ galaxy_info:
     #       Maximum 20 tags per role.
 
 dependencies:
-  - geerlingguy.docker
   - singleplatform-eng.users
   - willshersystems.sshd

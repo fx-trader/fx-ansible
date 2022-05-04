@@ -9,7 +9,7 @@
 
 - name: nginx container
   docker_container:
-    name: fx-web
+    name: fx-ui
     image: fxtrader/web
     published_ports:
       - 127.0.0.1:8080:80
@@ -27,4 +27,4 @@
   notify:
     - restart nginx
   with_items:
-    - conf.d/static.conf
+    - conf.d/ui.conf

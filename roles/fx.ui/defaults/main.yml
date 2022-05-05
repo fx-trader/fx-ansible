@@ -1,5 +1,5 @@
 ---
-fx:
-  ui:
-    fx_web:
-      volumes: []
+ui:
+  fx_web:
+    volumes: []
+  hostname: "ui.{{ fx_domainname }}"

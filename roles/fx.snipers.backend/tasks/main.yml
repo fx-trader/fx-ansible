@@ -1,4 +1,7 @@
 ---
+- name: "Debug fx var"
+  debug:
+    msg: "fx = {{ fx }}"
 - name: "Download {{role_path|basename}} docker image"
   docker_image:
     name: "{{ item }}"
@@ -32,6 +35,16 @@
     - restart nginx
   with_items:
     - conf.d/snipers.conf
+
+- name: Create letsencrypt acme-challenge directory
+  file:
+    path:  "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ snipers.acme_base_dir }}{{ fx.certbot_challenge_dir }}"
 
 - name: Set useful shell aliases
   template:

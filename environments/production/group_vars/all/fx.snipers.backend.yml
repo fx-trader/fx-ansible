@@ -1,2 +1,3 @@
-snipers:
-  hostname: snipers.fxhistoricaldata.com
+fx:
+  snipers:
+    hostname: snipers.fxhistoricaldata.com

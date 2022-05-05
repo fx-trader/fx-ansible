@@ -1,3 +1,0 @@
-portainer:
-  datadir: "{{ fx['datadir'] }}/portainer"
-  server_name: prefect.fxhistoricaldata.com

@@ -7,6 +7,8 @@ fx:
   basedir: "{{__fx_base_root_dir}}"
   cfgdir: "{{__fx_base_root_dir}}/cfg"
   datadir: "{{__fx_base_root_dir}}/data"
+  certbotdir: "/var/www/certbot"
+  certbot_challenge_dir: "/.well-known/acme-challenge"
   docker:
     network:
       name: fx-docker

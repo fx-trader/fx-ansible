@@ -8,3 +8,4 @@ diary:
     name: fx_diary
     user: fx_diary
     pass: fx_diary
+  hostname: "diary.{{ fx_domainname }}"

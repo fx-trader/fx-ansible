@@ -1,2 +1,5 @@
 ---
 # vars file for fx.api.backend
+snipers:
+  hostname: "snipers.{{ fx_domainname }}"
+  acme_base_dir: "{{ fx.certbotdir }}/snipers/"

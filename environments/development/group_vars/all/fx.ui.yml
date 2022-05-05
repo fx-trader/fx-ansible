@@ -1,7 +1,5 @@
 ---
-fx:
-  ui:
-    server_name: ui.fxdev00
-    fx_web:
-      volumes:
-        - "{{ fx_srcdir | default('') }}/fx-web/html:/usr/share/nginx/html:ro"
+ui:
+  fx_web:
+    volumes:
+      - "{{ fx_srcdir | default('') }}/fx-web/html:/usr/share/nginx/html:ro"

@@ -1,2 +1,5 @@
 ---
 # defaults file for fx.portainer
+portainer:
+  datadir: "{{ fx['datadir'] }}/portainer"
+  hostname: "prefect.{{ fx_domainname }}"

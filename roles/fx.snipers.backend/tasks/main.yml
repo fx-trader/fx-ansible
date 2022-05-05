@@ -1,7 +1,4 @@
 ---
-- name: "Debug fx var"
-  debug:
-    msg: "fx = {{ fx }}"
 - name: "Download {{role_path|basename}} docker image"
   docker_image:
     name: "{{ item }}"

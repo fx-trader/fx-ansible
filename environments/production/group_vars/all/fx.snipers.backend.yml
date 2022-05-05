@@ -1,3 +1,2 @@
-fx:
-  snipers:
-    hostname: snipers.fxhistoricaldata.com
+snipers:
+  ssl: 1

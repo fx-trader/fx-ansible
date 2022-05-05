@@ -1,0 +1,5 @@
+---
+snipers:
+  hostname: "snipers.{{ fx_domainname }}"
+  ssl: 0
+  acme_base_dir: "{{ fx.certbotdir }}/snipers/"

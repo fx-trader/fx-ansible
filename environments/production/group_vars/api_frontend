@@ -5,5 +5,3 @@ nginx:
   proxy_pass:
     - location: "/"
       backend: "http://localhost:5000/"
-    - location: "/snipers"
-      backend: "http://localhost:5567/snipers/"

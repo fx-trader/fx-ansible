@@ -28,3 +28,13 @@
     - restart nginx
   with_items:
     - conf.d/ui.conf
+
+- name: Create letsencrypt acme-challenge directory
+  file:
+    path:  "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ ui.acme_base_dir }}{{ fx.certbot_challenge_dir }}"

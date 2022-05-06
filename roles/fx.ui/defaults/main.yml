@@ -3,3 +3,5 @@ ui:
   fx_web:
     volumes: []
   hostname: "ui.{{ fx_domainname }}"
+  ssl: 0
+  acme_base_dir: "{{ fx.certbotdir }}/ui/"

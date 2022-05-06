@@ -1,7 +1,0 @@
----
-nginx:
-  hostname: api.fxdev00
-  port: 80
-  proxy_pass:
-    - location: "/"
-      backend: "http://localhost:5000/"

@@ -3,3 +3,5 @@
 portainer:
   datadir: "{{ fx['datadir'] }}/portainer"
   hostname: "prefect.{{ fx_domainname }}"
+  ssl: 0
+  acme_base_dir: "{{ fx.certbotdir }}/prefect/"

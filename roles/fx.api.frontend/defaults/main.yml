@@ -1,2 +1,9 @@
 ---
 # defaults file for fx.api.frontend
+api:
+  hostname: "api.{{ fx_domainname }}"
+  ssl: 0
+  acme_base_dir: "{{ fx.certbotdir }}/api/"
+  proxy_pass:
+    - location: "/"
+      backend: "http://localhost:5000/"

@@ -1,2 +1,3 @@
 snipers:
   ssl: 1
+  allow_origin: "http://ui.{{ fx_domainname }} https://ui.{{ fx_domainname }}"

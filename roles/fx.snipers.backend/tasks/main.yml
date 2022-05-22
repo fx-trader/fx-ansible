@@ -16,12 +16,11 @@
     volumes:
       - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
     published_ports:
-      - 127.0.0.1:5567:4567
+      - 127.0.0.1:5567:9292
     restart_policy: always
     state: started
     env:
       FX-SNIPERS-ALLOW-ORIGIN: "{{ snipers['allow_origin'] }}"
-    command: "ruby /webapp/app.rb -o 0.0.0.0"
 
 - name: Configure nginx
   template:

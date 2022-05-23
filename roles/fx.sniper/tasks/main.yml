@@ -19,3 +19,6 @@
     purge_networks: yes
     restart_policy: always
     state: started
+    env:
+      SNIPER_JWT_TOKEN: "{{ sniper_client.JWT_TOKEN }}"
+      SNIPER_ENDPOINT: "{{ 'https' if snipers.ssl else 'http'}}://{{  snipers.hostname }}"

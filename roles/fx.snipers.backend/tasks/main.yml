@@ -21,6 +21,8 @@
     state: started
     env:
       FX-SNIPERS-ALLOW-ORIGIN: "{{ snipers['allow_origin'] }}"
+      JWT_ISSUER: "{{ fx_domainname }}"
+      JWT_SECRET: "{{ snipers.JWT_SECRET }}"
 
 - name: Configure nginx
   template:

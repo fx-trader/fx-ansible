@@ -11,6 +11,7 @@
     - tmux
     - strace
     - vim-enhanced
+    - jq
 
 - name: Create fx directories
   file:

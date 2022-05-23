@@ -159,8 +159,10 @@ ansible-playbook -i ~/src/fx-ansible/environments/production fx.yml
 Make sure to list here all the variables created in ansible vault needed by the playbooks.  One should be able to re-create the vault by using this section of the document and providing appropriate values for each variable.
 
 ```
-ansible-vault encrypt_string --stdin-name 'ops_monitoring.docker_monitor_bot.discord_webhook' --vault-password-file .vpass >> group_vars/all/dem.yml
-ansible-vault encrypt_string --stdin-name 'oanda.token' --vault-password-file .vpass >> group_vars/all/fx.base.yml
+ansible-vault encrypt_string --stdin-name 'ops_monitoring.docker_monitor_bot.discord_webhook' --vault-password-file .vpass >> environments/development/group_vars/all/dem.yml
+ansible-vault encrypt_string --stdin-name 'oanda.token' --vault-password-file .vpass >> environments/development/group_vars/all/fx.base.yml
+ansible-vault encrypt_string --stdin-name 'snipers.JWT_SECRET' --vault-password-file .vpass >> environments/development/group_vars/all/fx.snipers.backend.yml
+curl -s -F email=joaocosta@zonalivre.org -F password=`cat /tmp/p` http://localhost:5567/login | jq -r .token | ansible-vault encrypt_string --stdin-name 'sniper_client.JWT_TOKEN' --vault-password-file .vpass >> environments/development/group_vars/all/fx.sniper.yml
 ```
 
 ## Customising source location for dev environments

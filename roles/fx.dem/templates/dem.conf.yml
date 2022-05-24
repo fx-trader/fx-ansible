@@ -6,7 +6,8 @@ settings:
     - smtp
     - portainer
     - snipers-client
-    - snipers-api
+    - snipers-api-public
+    - snipers-api-admin
     - snipers-db
     - fxapi-data
     - fxdatafeed

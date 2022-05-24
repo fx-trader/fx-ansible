@@ -68,6 +68,10 @@ The database instance runs inside a docker container. It includes a mysql udf bi
 ## Create database schema
 
     docker run --rm --network fx-docker fxtrader/snipers-api ruby /webapp/db/schema.rb
+    # Create sniper_client account
+    docker run --rm --network fx-docker fxtrader/snipers-api ruby /webapp/db/create_account.rb --sniper-client --email sniper_client@fxdev00 --password $(cat /tmp/p)
+    # Create public account
+    docker run --rm --network fx-docker fxtrader/snipers-api ruby /webapp/db/create_account.rb --email joaocosta@zonalivre.org --password $(cat /tmp/p)
 
 # Get fxhistoricaldata static website
     cd ~/src

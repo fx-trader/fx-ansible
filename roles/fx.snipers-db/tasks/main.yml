@@ -52,6 +52,6 @@
 # docker run --name snipers-db-new -v {{snipers['datadir']:/var/lib/postgresql/data -e "POSTGRES_USER=$user" -e "POSTGRES_PASSWORD=$pwd" -e "POSTGRES_DB=$db" -d postgres:$new_version
 # docker run --name snipers-db-old -v {{snipers['datadir'].old:/var/lib/postgresql/data -e "POSTGRES_USER=$user" -e "POSTGRES_PASSWORD=$pwd" -e "POSTGRES_DB=$db" -d postgres:$old_version
 # docker exec snipers-db-old pg_dumpall -U $user | docker exec -i snipers-db-new psql -U $user $db
-# docker rm -f snipers-db-{new,old} snipers-db snipers-api
-# Rerun ansible to recreate snipers-db and snipers-api
+# docker rm -f snipers-db-{new,old} snipers-db snipers-api-admin snipers-api-public
+# Rerun ansible to recreate snipers-db, snipers-api-admin and snipers-api-public
 

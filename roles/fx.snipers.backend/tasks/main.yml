@@ -6,9 +6,9 @@
   with_items:
     - fxtrader/snipers-api
 
-- name: snipers-api container
+- name: snipers-api-public container
   docker_container:
-    name: snipers-api
+    name: snipers-api-public
     image: fxtrader/snipers-api
     networks:
       - name: "{{ fx.docker.network.name }}"
@@ -20,9 +20,9 @@
     restart_policy: always
     state: started
     env:
-      FX-SNIPERS-ALLOW-ORIGIN: "{{ snipers['allow_origin'] }}"
-      JWT_ISSUER: "{{ fx_domainname }}"
-      JWT_SECRET: "{{ snipers.JWT_SECRET }}"
+      FX-SNIPERS-HTTP-HEADER-ALLOW-ORIGIN: "{{ snipers['allow_origin'] }}"
+      JWT_ISSUER: "{{ fx_domainname }}-public"
+      JWT_SECRET: "{{ snipers.JWT_SECRET.public }}"
 
 - name: Configure nginx
   template:
@@ -45,6 +45,24 @@
     mode: 0755
   with_items:
     - "{{ snipers.acme_base_dir }}{{ fx.certbot_challenge_dir }}"
+
+- name: snipers-api-admin container
+  docker_container:
+    name: snipers-api-admin
+    image: fxtrader/snipers-api
+    networks:
+      - name: "{{ fx.docker.network.name }}"
+    purge_networks: yes
+    volumes:
+      - "{{fx['cfgdir']}}:/etc/fxtrader:ro"
+    published_ports:
+      - 127.0.0.1:6767:9292
+    restart_policy: always
+    state: started
+    env:
+      FX-SNIPERS-ALLOW-SNIPER-CLIENT: "1"
+      JWT_ISSUER: "{{ fx_domainname }}-admin"
+      JWT_SECRET: "{{ snipers.JWT_SECRET.admin }}"
 
 - name: Set useful shell aliases
   template:

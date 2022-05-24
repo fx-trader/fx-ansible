@@ -161,8 +161,9 @@ Make sure to list here all the variables created in ansible vault needed by the 
 ```
 ansible-vault encrypt_string --stdin-name 'ops_monitoring.docker_monitor_bot.discord_webhook' --vault-password-file .vpass >> environments/development/group_vars/all/dem.yml
 ansible-vault encrypt_string --stdin-name 'oanda.token' --vault-password-file .vpass >> environments/development/group_vars/all/fx.base.yml
-ansible-vault encrypt_string --stdin-name 'snipers.JWT_SECRET' --vault-password-file .vpass >> environments/development/group_vars/all/fx.snipers.backend.yml
-curl -s -F email=joaocosta@zonalivre.org -F password=`cat /tmp/p` http://localhost:5567/login | jq -r .token | ansible-vault encrypt_string --stdin-name 'sniper_client.JWT_TOKEN' --vault-password-file .vpass >> environments/development/group_vars/all/fx.sniper.yml
+head -c 32 /dev/urandom | base64 -w 0 | ansible-vault encrypt_string --stdin-name 'snipers.JWT_SECRET.public' --vault-password-file .vpass >> environments/development/group_vars/all/fx.snipers.backend.yml
+head -c 32 /dev/urandom | base64 -w 0 | ansible-vault encrypt_string --stdin-name 'snipers.JWT_SECRET.admin' --vault-password-file .vpass >> environments/development/group_vars/all/fx.snipers.backend.yml
+curl -s -F email=sniper_client@fxdev00 -F password=`cat /tmp/p` http://localhost:6767/login | jq -r .token | ansible-vault encrypt_string --stdin-name 'sniper_client.JWT_TOKEN' --vault-password-file .vpass >> environments/development/group_vars/all/fx.sniper.yml
 ```
 
 ## Customising source location for dev environments

@@ -23,6 +23,7 @@
       FX-SNIPERS-HTTP-HEADER-ALLOW-ORIGIN: "{{ snipers['allow_origin'] }}"
       JWT_ISSUER: "{{ fx_domainname }}-public"
       JWT_SECRET: "{{ snipers.JWT_SECRET.public }}"
+      LOCKBOX_MASTER_KEY: "{{ snipers.lockbox.key }}"
 
 - name: Configure nginx
   template:
@@ -63,6 +64,7 @@
       FX-SNIPERS-ALLOW-SNIPER-CLIENT: "1"
       JWT_ISSUER: "{{ fx_domainname }}-admin"
       JWT_SECRET: "{{ snipers.JWT_SECRET.admin }}"
+      LOCKBOX_MASTER_KEY: "{{ snipers.lockbox.key }}"
 
 - name: Set useful shell aliases
   template:

@@ -14,6 +14,7 @@
     networks:
       - name: "{{ fx.docker.network.name }}"
     purge_networks: no
+    networks_cli_compatible: no
     env:
       POSTFIX_myhostname: smtp.fxhistoricaldata.com
     restart_policy: always

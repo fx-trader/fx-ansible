@@ -3,6 +3,12 @@
 - name: Setup fx server
   hosts: all
 
+# The latest ansible 2.12 uses python 3.8 but one of the dependencies (python3-firewall) is only available in python 3.6
+# to workaround it, i'm setting ansible_python_interpreter to use the same python that python3-firewall uses
+# See https://stackoverflow.com/questions/67193176/python-module-firewall-not-found/72448139#72448139 and https://bugzilla.redhat.com/show_bug.cgi?id=2091931.
+  vars:
+      - ansible_python_interpreter: /usr/bin/python3
+
   roles:
     - { role: fx.api.frontend, tags: [ fx, api, snipers ] }
     - { role: fx.datafeed, tags: [ fx, datafeed ]  }

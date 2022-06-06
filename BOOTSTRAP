@@ -68,10 +68,23 @@ The database instance runs inside a docker container. It includes a mysql udf bi
 ## Create database schema
 
     docker run --rm --network fx-docker fxtrader/snipers-api ruby /webapp/db/schema.rb
+
+## Create data necessary to run things
+#
     # Create sniper_client account
     docker run --rm --network fx-docker fxtrader/snipers-api ruby /webapp/db/create_account.rb --sniper-client --email sniper_client@fxdev00 --password $(cat /tmp/p)
     # Create public account
     docker run --rm --network fx-docker fxtrader/snipers-api ruby /webapp/db/create_account.rb --email joaocosta@zonalivre.org --password $(cat /tmp/p)
+
+    MY_TOKEN=$(curl -s -F email=joaocosta@zonalivre.org -F password=`cat /tmp/p` http://localhost:5567/login | jq -r .token)
+
+    curl --request POST \
+        -H "Authorization: Bearer $MY_TOKEN" \
+        --data '{"account_type": "demo", "token": "'`cat /tmp/demo.token`'"}' http://localhost:5567/provideroanda
+
+    curl --request POST \
+        -H "Authorization: Bearer $MY_TOKEN" \
+        --data '{"account_type": "real", "token": "'`cat /tmp/prod.token`'"}' http://localhost:5567/provideroanda
 
 # Get fxhistoricaldata static website
     cd ~/src

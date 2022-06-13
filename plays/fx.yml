@@ -7,7 +7,7 @@
 # to workaround it, i'm setting ansible_python_interpreter to use the same python that python3-firewall uses
 # See https://stackoverflow.com/questions/67193176/python-module-firewall-not-found/72448139#72448139 and https://bugzilla.redhat.com/show_bug.cgi?id=2091931.
   vars:
-      - ansible_python_interpreter: /usr/bin/python3
+      - ansible_python_interpreter: /usr/libexec/platform-python
 
   roles:
     - { role: fx.api.frontend, tags: [ fx, api, snipers ] }
